@@ -10,18 +10,18 @@
  * @package PhpMyAdmin
  */
 
-if (!getenv('FUSIO_ENV')) {
+if (!isset($_ENV['FUSIO_ENV'])) {
     $dotenv = new \Symfony\Component\Dotenv\Dotenv();
-    $dotenv->load(__DIR__ . '/../../.env');
+    $dotenv->load(__DIR__ . '/../../fusio/.env');
 }
 
 /**
  * This is needed for cookie based authentication to encrypt password in
  * cookie. Needs to be 32 chars long.
  */
-$cfg['blowfish_secret'] = getenv('FUSIO_PROJECT_KEY'); /* YOU MUST FILL IN THIS FOR COOKIE AUTH! */
+$cfg['blowfish_secret'] = $_ENV['FUSIO_PROJECT_KEY']; /* YOU MUST FILL IN THIS FOR COOKIE AUTH! */
 
-$cfg['PmaAbsoluteUri'] = getenv('FUSIO_APPS_URL') . '/pma/';
+$cfg['PmaAbsoluteUri'] = $_ENV['FUSIO_APPS_URL'] . '/pma/';
 
 /**
  * Servers configuration
@@ -29,20 +29,20 @@ $cfg['PmaAbsoluteUri'] = getenv('FUSIO_APPS_URL') . '/pma/';
 $i = 0;
 
 // dynamically load all connections from Fusio
-$mysqli = new \mysqli(getenv('FUSIO_DB_HOST'), getenv('FUSIO_DB_USER'), getenv('FUSIO_DB_PW'), getenv('FUSIO_DB_NAME'));
+$mysqli = new \mysqli($_ENV['FUSIO_DB_HOST'], $_ENV['FUSIO_DB_USER'], $_ENV['FUSIO_DB_PW'], $_ENV['FUSIO_DB_NAME']);
 $stmt = $mysqli->prepare('SELECT id, class, config FROM fusio_connection ORDER BY name ASC');
 $stmt->execute();
 $stmt->bind_result($id, $class, $config);
 
 while ($stmt->fetch()) {
     if ($class === 'Fusio\Impl\Connection\System') {
-        $host = getenv('FUSIO_DB_HOST');
-        $db = getenv('FUSIO_DB_NAME');
+        $host = $_ENV['FUSIO_DB_HOST'];
+        $db = $_ENV['FUSIO_DB_NAME'];
     } elseif ($class === 'Fusio\Adapter\Sql\Connection\Sql' && !empty($config)) {
         $parts = explode('.', $config, 2);
         list($iv, $data) = $parts;
 
-        $config = openssl_decrypt(base64_decode($data), 'AES-128-CBC', getenv('FUSIO_PROJECT_KEY'), OPENSSL_RAW_DATA, base64_decode($iv));
+        $config = openssl_decrypt(base64_decode($data), 'AES-128-CBC', $_ENV['FUSIO_PROJECT_KEY'], OPENSSL_RAW_DATA, base64_decode($iv));
         $config = json_decode($config, true);
 
         $host = $config['host'];
