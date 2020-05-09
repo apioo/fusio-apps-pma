@@ -12,7 +12,7 @@
 
 if (!isset($_ENV['FUSIO_ENV'])) {
     $dotenv = new \Symfony\Component\Dotenv\Dotenv();
-    $dotenv->load(__DIR__ . '/../../fusio/.env');
+    $dotenv->load(__DIR__ . '/../../.env');
 }
 
 /**
