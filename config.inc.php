@@ -1,65 +1,68 @@
 <?php
-/* vim: set expandtab sw=4 ts=4 sts=4: */
 /**
  * phpMyAdmin sample configuration, you can use it as base for
  * manual configuration. For easier setup you can use setup/
  *
  * All directives are explained in documentation in the doc/ folder
  * or at <https://docs.phpmyadmin.net/>.
- *
- * @package PhpMyAdmin
  */
 
-if (!isset($_ENV['FUSIO_ENV'])) {
-    $dotenv = new \Symfony\Component\Dotenv\Dotenv();
-    $dotenv->load(__DIR__ . '/../../.env');
-}
+declare(strict_types=1);
 
 /**
  * This is needed for cookie based authentication to encrypt password in
  * cookie. Needs to be 32 chars long.
  */
-$cfg['blowfish_secret'] = $_ENV['FUSIO_PROJECT_KEY']; /* YOU MUST FILL IN THIS FOR COOKIE AUTH! */
+$cfg['blowfish_secret'] = ''; /* YOU MUST FILL IN THIS FOR COOKIE AUTH! */
 
-$cfg['PmaAbsoluteUri'] = $_ENV['FUSIO_APPS_URL'] . '/pma/';
+$cfg['AllowArbitraryServer'] = true;
 
 /**
  * Servers configuration
  */
 $i = 0;
 
-// dynamically load all connections from Fusio
-$mysqli = new \mysqli($_ENV['FUSIO_DB_HOST'], $_ENV['FUSIO_DB_USER'], $_ENV['FUSIO_DB_PW'], $_ENV['FUSIO_DB_NAME']);
-$stmt = $mysqli->prepare('SELECT id, class, config FROM fusio_connection ORDER BY name ASC');
-$stmt->execute();
-$stmt->bind_result($id, $class, $config);
+/**
+ * First server
+ */
+$i++;
+/* Authentication type */
+$cfg['Servers'][$i]['auth_type'] = 'cookie';
+/* Server parameters */
+$cfg['Servers'][$i]['compress'] = false;
+$cfg['Servers'][$i]['AllowNoPassword'] = false;
 
-while ($stmt->fetch()) {
-    if ($class === 'Fusio\Impl\Connection\System') {
-        $host = $_ENV['FUSIO_DB_HOST'];
-        $db = $_ENV['FUSIO_DB_NAME'];
-    } elseif ($class === 'Fusio\Adapter\Sql\Connection\Sql' && !empty($config)) {
-        $parts = explode('.', $config, 2);
-        list($iv, $data) = $parts;
+/**
+ * phpMyAdmin configuration storage settings.
+ */
 
-        $config = openssl_decrypt(base64_decode($data), 'AES-128-CBC', $_ENV['FUSIO_PROJECT_KEY'], OPENSSL_RAW_DATA, base64_decode($iv));
-        $config = json_decode($config, true);
+/* User used to manipulate with storage */
+// $cfg['Servers'][$i]['controlhost'] = '';
+// $cfg['Servers'][$i]['controlport'] = '';
+// $cfg['Servers'][$i]['controluser'] = 'pma';
+// $cfg['Servers'][$i]['controlpass'] = 'pmapass';
 
-        $host = $config['host'];
-        $db = $config['database'];
-    }
-
-    $i++;
-    /* Authentication type */
-    $cfg['Servers'][$i]['auth_type'] = 'cookie';
-    /* Server parameters */
-    $cfg['Servers'][$i]['host'] = $host;
-    $cfg['Servers'][$i]['only_db'] = [$db];
-    $cfg['Servers'][$i]['compress'] = false;
-    $cfg['Servers'][$i]['AllowNoPassword'] = true;
-}
-
-$stmt->close();
+/* Storage database and tables */
+// $cfg['Servers'][$i]['pmadb'] = 'phpmyadmin';
+// $cfg['Servers'][$i]['bookmarktable'] = 'pma__bookmark';
+// $cfg['Servers'][$i]['relation'] = 'pma__relation';
+// $cfg['Servers'][$i]['table_info'] = 'pma__table_info';
+// $cfg['Servers'][$i]['table_coords'] = 'pma__table_coords';
+// $cfg['Servers'][$i]['pdf_pages'] = 'pma__pdf_pages';
+// $cfg['Servers'][$i]['column_info'] = 'pma__column_info';
+// $cfg['Servers'][$i]['history'] = 'pma__history';
+// $cfg['Servers'][$i]['table_uiprefs'] = 'pma__table_uiprefs';
+// $cfg['Servers'][$i]['tracking'] = 'pma__tracking';
+// $cfg['Servers'][$i]['userconfig'] = 'pma__userconfig';
+// $cfg['Servers'][$i]['recent'] = 'pma__recent';
+// $cfg['Servers'][$i]['favorite'] = 'pma__favorite';
+// $cfg['Servers'][$i]['users'] = 'pma__users';
+// $cfg['Servers'][$i]['usergroups'] = 'pma__usergroups';
+// $cfg['Servers'][$i]['navigationhiding'] = 'pma__navigationhiding';
+// $cfg['Servers'][$i]['savedsearches'] = 'pma__savedsearches';
+// $cfg['Servers'][$i]['central_columns'] = 'pma__central_columns';
+// $cfg['Servers'][$i]['designer_settings'] = 'pma__designer_settings';
+// $cfg['Servers'][$i]['export_templates'] = 'pma__export_templates';
 
 /**
  * End of servers configuration
@@ -68,7 +71,7 @@ $stmt->close();
 /**
  * Directories for saving/loading files from server
  */
-$cfg['UploadDir'] = __DIR__ . '/tmp';
+$cfg['UploadDir'] = '';
 $cfg['SaveDir'] = '';
 
 /**

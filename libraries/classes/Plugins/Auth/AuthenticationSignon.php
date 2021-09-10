@@ -1,28 +1,37 @@
 <?php
-/* vim: set expandtab sw=4 ts=4 sts=4: */
 /**
  * SignOn Authentication plugin for phpMyAdmin
- *
- * @package    PhpMyAdmin-Authentication
- * @subpackage SignOn
  */
+
+declare(strict_types=1);
+
 namespace PhpMyAdmin\Plugins\Auth;
 
 use PhpMyAdmin\Core;
 use PhpMyAdmin\Plugins\AuthenticationPlugin;
 use PhpMyAdmin\Util;
+use const PHP_VERSION;
+use function array_merge;
+use function defined;
+use function file_exists;
+use function in_array;
+use function session_get_cookie_params;
+use function session_id;
+use function session_name;
+use function session_set_cookie_params;
+use function session_start;
+use function session_write_close;
+use function version_compare;
 
 /**
  * Handles the SignOn authentication method
- *
- * @package PhpMyAdmin-Authentication
  */
 class AuthenticationSignon extends AuthenticationPlugin
 {
     /**
      * Displays authentication form
      *
-     * @return boolean   always true (no return indeed)
+     * @return bool always true (no return indeed)
      */
     public function showLoginForm()
     {
@@ -33,20 +42,19 @@ class AuthenticationSignon extends AuthenticationPlugin
             Core::sendHeaderLocation($GLOBALS['cfg']['Server']['SignonURL']);
         }
 
-        if (!defined('TESTSUITE')) {
-            exit();
-        } else {
-            return false;
+        if (! defined('TESTSUITE')) {
+            exit;
         }
+
+        return false;
     }
 
     /**
      * Set cookie params
      *
      * @param array $sessionCookieParams The cookie params
-     * @return void
      */
-    public function setCookieParams(array $sessionCookieParams = null)
+    public function setCookieParams(?array $sessionCookieParams = null): void
     {
         /* Session cookie params from config */
         if ($sessionCookieParams === null) {
@@ -54,7 +62,7 @@ class AuthenticationSignon extends AuthenticationPlugin
         }
 
         /* Sanitize cookie params */
-        $defaultCookieParams = function ($key) {
+        $defaultCookieParams = static function (string $key) {
             switch ($key) {
                 case 'lifetime':
                     return 0;
@@ -67,38 +75,42 @@ class AuthenticationSignon extends AuthenticationPlugin
                 case 'httponly':
                     return false;
             }
+
             return null;
         };
 
-        foreach (array('lifetime', 'path', 'domain', 'secure', 'httponly') as $key) {
-            if (! isset($sessionCookieParams[$key])) {
-                $sessionCookieParams[$key] = $defaultCookieParams($key);
+        foreach (['lifetime', 'path', 'domain', 'secure', 'httponly'] as $key) {
+            if (isset($sessionCookieParams[$key])) {
+                continue;
             }
+
+            $sessionCookieParams[$key] = $defaultCookieParams($key);
         }
 
         if (isset($sessionCookieParams['samesite'])
-            && ! in_array($sessionCookieParams['samesite'], array('Lax', 'Strict'))) {
+            && ! in_array($sessionCookieParams['samesite'], ['Lax', 'Strict'])
+        ) {
                 // Not a valid value for samesite
                 unset($sessionCookieParams['samesite']);
         }
 
-        if (version_compare(phpversion(), '7.3.0', '>=')) {
+        if (version_compare(PHP_VERSION, '7.3.0', '>=')) {
             session_set_cookie_params($sessionCookieParams);
+        } else {
+            session_set_cookie_params(
+                $sessionCookieParams['lifetime'],
+                $sessionCookieParams['path'],
+                $sessionCookieParams['domain'],
+                $sessionCookieParams['secure'],
+                $sessionCookieParams['httponly']
+            );
         }
-
-        session_set_cookie_params(
-            $sessionCookieParams['lifetime'],
-            $sessionCookieParams['path'],
-            $sessionCookieParams['domain'],
-            $sessionCookieParams['secure'],
-            $sessionCookieParams['httponly']
-        );
     }
 
     /**
      * Gets authentication credentials
      *
-     * @return boolean   whether we get authentication settings or not
+     * @return bool whether we get authentication settings or not
      */
     public function readCredentials()
     {
@@ -126,11 +138,11 @@ class AuthenticationSignon extends AuthenticationPlugin
         $single_signon_port = $GLOBALS['cfg']['Server']['port'];
 
         /* No configuration updates */
-        $single_signon_cfgupdate = array();
+        $single_signon_cfgupdate = [];
 
         /* Handle script based auth */
-        if (!empty($script_name)) {
-            if (!@file_exists($script_name)) {
+        if (! empty($script_name)) {
+            if (! @file_exists($script_name)) {
                 Core::fatalError(
                     __('Can not find signon authentication script:')
                     . ' ' . $script_name
@@ -138,18 +150,18 @@ class AuthenticationSignon extends AuthenticationPlugin
             }
             include $script_name;
 
-            list ($this->user, $this->password)
+            [$this->user, $this->password]
                 = get_login_credentials($GLOBALS['cfg']['Server']['user']);
         } elseif (isset($_COOKIE[$session_name])) { /* Does session exist? */
             /* End current session */
             $old_session = session_name();
             $old_id = session_id();
             $oldCookieParams = session_get_cookie_params();
-            if (!defined('TESTSUITE')) {
+            if (! defined('TESTSUITE')) {
                 session_write_close();
             }
             /* Load single signon session */
-            if (!defined('TESTSUITE')) {
+            if (! defined('TESTSUITE')) {
                 $this->setCookieParams();
                 session_name($session_name);
                 session_id($_COOKIE[$session_name]);
@@ -184,16 +196,23 @@ class AuthenticationSignon extends AuthenticationPlugin
                 $pma_token = $_SESSION['PMA_single_signon_token'];
             }
 
+            $HMACSecret = Util::generateRandom(16);
+            if (isset($_SESSION['PMA_single_signon_HMAC_secret'])) {
+                $HMACSecret = $_SESSION['PMA_single_signon_HMAC_secret'];
+            }
+
             /* End single signon session */
-            if (!defined('TESTSUITE')) {
+            if (! defined('TESTSUITE')) {
                 session_write_close();
             }
 
             /* Restart phpMyAdmin session */
-            if (!defined('TESTSUITE')) {
+            if (! defined('TESTSUITE')) {
                 $this->setCookieParams($oldCookieParams);
-                session_name($old_session);
-                if (!empty($old_id)) {
+                if ($old_session !== null) {
+                    session_name($old_session);
+                }
+                if (! empty($old_id)) {
                     session_id($old_id);
                 }
                 session_start();
@@ -212,8 +231,9 @@ class AuthenticationSignon extends AuthenticationPlugin
             );
 
             /* Restore our token */
-            if (!empty($pma_token)) {
+            if (! empty($pma_token)) {
                 $_SESSION[' PMA_token '] = $pma_token;
+                $_SESSION[' HMAC_secret '] = $HMACSecret;
             }
 
             /**
@@ -250,7 +270,7 @@ class AuthenticationSignon extends AuthenticationPlugin
 
         /* Does session exist? */
         if (isset($_COOKIE[$session_name])) {
-            if (!defined('TESTSUITE')) {
+            if (! defined('TESTSUITE')) {
                 /* End current session */
                 session_write_close();
 
