@@ -16,6 +16,7 @@ declare(strict_types=1);
 $cfg['blowfish_secret'] = '798d489858b2a7c6230a085a193638991aede7f0'; /* YOU MUST FILL IN THIS FOR COOKIE AUTH! */
 
 $cfg['AllowArbitraryServer'] = true;
+$cfg['CheckConfigurationPermissions'] = false;
 
 /**
  * Servers configuration
