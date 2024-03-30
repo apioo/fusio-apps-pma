@@ -8,10 +8,12 @@ declare(strict_types=1);
 namespace PhpMyAdmin\Controllers\Database;
 
 use PhpMyAdmin\DatabaseInterface;
-use PhpMyAdmin\Response;
+use PhpMyAdmin\ResponseRenderer;
 use PhpMyAdmin\Server\Privileges;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Util;
+
+use function mb_strtolower;
 
 /**
  * Controller for database privileges
@@ -24,40 +26,42 @@ class PrivilegesController extends AbstractController
     /** @var DatabaseInterface */
     private $dbi;
 
-    /**
-     * @param Response          $response
-     * @param string            $db       Database name
-     * @param DatabaseInterface $dbi
-     */
-    public function __construct($response, Template $template, $db, Privileges $privileges, $dbi)
-    {
+    public function __construct(
+        ResponseRenderer $response,
+        Template $template,
+        string $db,
+        Privileges $privileges,
+        DatabaseInterface $dbi
+    ) {
         parent::__construct($response, $template, $db);
         $this->privileges = $privileges;
         $this->dbi = $dbi;
     }
 
     /**
-     * @param array $params Request parameters
+     * @param string[] $params Request parameters
+     * @psalm-param array{checkprivsdb: string} $params
      */
-    public function index(array $params): string
+    public function __invoke(array $params): string
     {
-        global $cfg, $text_dir, $PMA_Theme;
+        global $cfg, $text_dir;
 
-        $scriptName = Util::getScriptNameForOption(
-            $cfg['DefaultTabDatabase'],
-            'database'
-        );
+        $scriptName = Util::getScriptNameForOption($cfg['DefaultTabDatabase'], 'database');
+
+        $db = $params['checkprivsdb'];
+        if ($this->dbi->getLowerCaseNames() === '1') {
+            $db = mb_strtolower($params['checkprivsdb']);
+        }
 
         $privileges = [];
         if ($this->dbi->isSuperUser()) {
-            $privileges = $this->privileges->getAllPrivileges($params['checkprivsdb']);
+            $privileges = $this->privileges->getAllPrivileges($db);
         }
 
         return $this->template->render('database/privileges/index', [
             'is_superuser' => $this->dbi->isSuperUser(),
-            'db' => $params['checkprivsdb'],
+            'db' => $db,
             'database_url' => $scriptName,
-            'theme_image_path' => $PMA_Theme->getImgPath(),
             'text_dir' => $text_dir,
             'is_createuser' => $this->dbi->isCreateUser(),
             'is_grantuser' => $this->dbi->isGrantUser(),

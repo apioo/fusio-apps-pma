@@ -12,6 +12,12 @@
     </td>
   {% endif %}
   <td>
+    {{ trigger.action_timing }}
+  </td>
+  <td>
+    {{ trigger.event_manipulation }}
+  </td>
+  <td>
     {% if has_edit_privilege %}
       <a class="ajax edit_anchor" href="{{ url('/database/triggers', {
         'db': db,
@@ -38,23 +44,18 @@
   <td>
     {% if has_drop_privilege %}
       {{ link_or_button(
-        url('/sql', {
+        url('/sql'),
+        {
           'db': db,
           'table': table,
           'sql_query': trigger.drop,
           'goto': url('/database/triggers', {'db': db})
-        }),
+        },
         get_icon('b_drop', 'Drop'|trans),
         {'class': 'ajax drop_anchor'}
       ) }}
     {% else %}
       {{ get_icon('bd_drop', 'Drop'|trans) }}
     {% endif %}
-  </td>
-  <td>
-    {{ trigger.action_timing }}
-  </td>
-  <td>
-    {{ trigger.event_manipulation }}
   </td>
 </tr>

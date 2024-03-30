@@ -1,9 +1,4 @@
 <?php
-/**
- * Defines a token along with a set of types and flags and utility functions.
- *
- * An array of tokens will result after parsing the query.
- */
 
 declare(strict_types=1);
 
@@ -17,8 +12,11 @@ use function stripcslashes;
 use function strtoupper;
 
 /**
- * A structure representing a lexeme that explicitly indicates its
- * categorization for the purpose of parsing.
+ * Defines a token along with a set of types and flags and utility functions.
+ *
+ * An array of tokens will result after parsing the query.
+ *
+ * A structure representing a lexeme that explicitly indicates its categorization for the purpose of parsing.
  */
 class Token
 {
@@ -168,7 +166,7 @@ class Token
     /**
      * The keyword value this token contains, always uppercase.
      *
-     * @var mixed
+     * @var mixed|string|null
      */
     public $keyword;
 
@@ -192,7 +190,7 @@ class Token
      * The position is counted in chars, not bytes, so you should
      * use mb_* functions to properly handle utf-8 multibyte chars.
      *
-     * @var int
+     * @var int|null
      */
     public $position;
 
@@ -229,10 +227,13 @@ class Token
                 }
 
                 return $this->keyword;
+
             case self::TYPE_WHITESPACE:
                 return ' ';
+
             case self::TYPE_BOOL:
                 return strtoupper($this->token) === 'TRUE';
+
             case self::TYPE_NUMBER:
                 $ret = str_replace('--', '', $this->token); // e.g. ---42 === -42
                 if ($this->flags & self::FLAG_NUMBER_HEX) {
@@ -242,15 +243,14 @@ class Token
                     } else {
                         $ret = hexdec($ret);
                     }
-                } elseif (($this->flags & self::FLAG_NUMBER_APPROXIMATE)
-                || ($this->flags & self::FLAG_NUMBER_FLOAT)
-                ) {
+                } elseif (($this->flags & self::FLAG_NUMBER_APPROXIMATE) || ($this->flags & self::FLAG_NUMBER_FLOAT)) {
                     $ret = (float) $ret;
                 } elseif (! ($this->flags & self::FLAG_NUMBER_BINARY)) {
                     $ret = (int) $ret;
                 }
 
                 return $ret;
+
             case self::TYPE_STRING:
                 // Trims quotes.
                 $str = $this->token;
@@ -272,6 +272,7 @@ class Token
                 $str = stripcslashes($str);
 
                 return $str;
+
             case self::TYPE_SYMBOL:
                 $str = $this->token;
                 if (isset($str[0]) && ($str[0] === '@')) {
@@ -289,9 +290,7 @@ class Token
                     $str = mb_substr($str, 1, mb_strlen($str), 'UTF-8');
                 }
 
-                if (isset($str[0]) && (($str[0] === '`')
-                || ($str[0] === '"') || ($str[0] === '\''))
-                ) {
+                if (isset($str[0]) && (($str[0] === '`') || ($str[0] === '"') || ($str[0] === '\''))) {
                     $quote = $str[0];
                     $str = str_replace($quote . $quote, $quote, $str);
                     $str = mb_substr($str, 1, -1, 'UTF-8');

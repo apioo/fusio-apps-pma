@@ -1,6 +1,6 @@
 .icon {
   margin: 0;
-  margin-#{$left}: 0.3em;
+  margin-left: 0.3em;
   padding: 0 !important;
   width: 16px;
   height: 16px;
@@ -157,6 +157,10 @@
 
 .ic_b_newdb {
   background-image: url('../img/b_newdb.png');
+}
+
+.ic_db_drop {
+  background-image: url('../img/b_deltbl_white.png');
 }
 
 .ic_b_newtbl {
@@ -548,6 +552,10 @@
   background-image: url('../img/s_cog.png');
 }
 
+.ic_s_collapseall {
+  background-image: url('../img/s_collapseall.png');
+}
+
 .ic_s_db {
   background-image: url('../img/s_db.png');
 }
@@ -578,6 +586,10 @@
 
 .ic_s_lock {
   background-image: url('../img/s_lock.png');
+}
+
+.ic_s_unlock {
+  background-image: url('../img/lock_open.png');
 }
 
 .ic_s_loggoff {

@@ -10,7 +10,6 @@
  */
 
 /* global generateFromBlock, generateWhereBlock */ // js/database/query_generator.js
-/* global md5 */ // js/vendor/jquery/jquery.md5.js
 
 /**
  * js file for handling AJAX and other events in /database/multi-table-query
@@ -33,7 +32,6 @@ AJAX.registerOnload('database/multi_table_query.js', function () {
     editor.setSize(-1, 50);
 
     var columnCount = 3;
-    Functions.initSlider();
     addNewColumnCallbacks();
 
     $('#update_query_button').on('click', function () {
@@ -129,6 +127,7 @@ AJAX.registerOnload('database/multi_table_query.js', function () {
             'db': $('#db_name').val(),
             'sql_query': query,
             'ajax_request': '1',
+            'server': CommonParams.get('server'),
             'token': CommonParams.get('token')
         };
         $.ajax({
@@ -148,7 +147,7 @@ AJAX.registerOnload('database/multi_table_query.js', function () {
                     });
                 });
                 $('#sql_results').html($resultsDom);
-                $('#page_content').find('a').first().trigger('click');
+                $('#slide-handle').trigger('click');// Collapse search criteria area
             }
         });
     });
@@ -156,12 +155,10 @@ AJAX.registerOnload('database/multi_table_query.js', function () {
     $('#add_column_button').on('click', function () {
         columnCount++;
         var $newColumnDom = $($('#new_column_layout').html()).clone();
-        $newColumnDom.find('div').first().find('div').first().attr('id', columnCount.toString());
-        $newColumnDom.find('a').first().remove();
-        $newColumnDom.find('.pma_auto_slider').first().unwrap();
-        $newColumnDom.find('.pma_auto_slider').first().attr('title', 'criteria');
+        $newColumnDom.find('.jsCriteriaButton').first().attr('data-bs-target', '#criteriaOptionsExtra' + columnCount.toString());
+        $newColumnDom.find('.jsCriteriaButton').first().attr('aria-controls', 'criteriaOptionsExtra' + columnCount.toString());
+        $newColumnDom.find('.jsCriteriaOptions').first().attr('id', 'criteriaOptionsExtra' + columnCount.toString());
         $('#add_column_button').parent().before($newColumnDom);
-        Functions.initSlider();
         addNewColumnCallbacks();
     });
 
@@ -172,17 +169,17 @@ AJAX.registerOnload('database/multi_table_query.js', function () {
                 if ($sibs.length === 0) {
                     $sibs = $(this).parent().parent().find('.columnNameSelect');
                 }
-                $sibs.first().html($('#' + md5($(this).val())).html());
+                $sibs.first().html($('#' + $(this).find(':selected').data('hash')).html());
             });
         });
 
-        $('.removeColumn').each(function () {
+        $('.jsRemoveColumn').each(function () {
             $(this).on('click', function () {
                 $(this).parent().remove();
             });
         });
 
-        $('a.ajax').each(function () {
+        $('.jsCriteriaButton').each(function () {
             $(this).on('click', function (event, from) {
                 if (from === null) {
                     var $checkbox = $(this).siblings('.criteria_col').first();
@@ -190,14 +187,19 @@ AJAX.registerOnload('database/multi_table_query.js', function () {
                 }
                 var $criteriaColCount = $('.criteria_col:checked').length;
                 if ($criteriaColCount > 1) {
-                    $(this).siblings('.slide-wrapper').first().find('.logical_operator').first().css('display','table-row');
+                    $(this).siblings('.jsCriteriaOptions').first().find('.logical_operator').first().css('display','table-row');
                 }
             });
         });
 
         $('.criteria_col').each(function () {
             $(this).on('change', function () {
-                var $anchor = $(this).siblings('a.ajax').first();
+                var $anchor = $(this).siblings('.jsCriteriaButton').first();
+                if ($(this).is(':checked') && ! $anchor.hasClass('collapsed')) {
+                    // Do not collapse on checkbox tick as it does not make sense
+                    // The user has it open and wants to tick the box
+                    return;
+                }
                 $anchor.trigger('click', ['Trigger']);
             });
         });

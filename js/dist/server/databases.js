@@ -1,5 +1,3 @@
-"use strict";
-
 /**
  * @fileoverview    functions used on the server databases list page
  * @name            Server Databases
@@ -9,9 +7,6 @@
  * @required    js/functions.js
  */
 
-/* global MicroHistory */
-// js/microhistory.js
-
 /**
  * Unbind all event handlers before tearing down a page
  */
@@ -19,6 +14,7 @@ AJAX.registerTeardown('server/databases.js', function () {
   $(document).off('submit', '#dbStatsForm');
   $(document).off('submit', '#create_database_form.ajax');
 });
+
 /**
  * AJAX scripts for /server/databases
  *
@@ -26,7 +22,6 @@ AJAX.registerTeardown('server/databases.js', function () {
  * Drop Databases
  *
  */
-
 AJAX.registerOnload('server/databases.js', function () {
   /**
    * Attach Event Handler for 'Drop Databases'
@@ -34,29 +29,29 @@ AJAX.registerOnload('server/databases.js', function () {
   $(document).on('submit', '#dbStatsForm', function (event) {
     event.preventDefault();
     var $form = $(this);
+
     /**
      * @var selected_dbs Array containing the names of the checked databases
      */
-
-    var selectedDbs = []; // loop over all checked checkboxes, except the .checkall_box checkbox
-
+    var selectedDbs = [];
+    // loop over all checked checkboxes, except the .checkall_box checkbox
     $form.find('input:checkbox:checked:not(.checkall_box)').each(function () {
       $(this).closest('tr').addClass('removeMe');
       selectedDbs[selectedDbs.length] = 'DROP DATABASE `' + Functions.escapeHtml($(this).val()) + '`;';
     });
-
     if (!selectedDbs.length) {
-      Functions.ajaxShowMessage($('<div class="alert alert-primary" role="alert"></div>').text(Messages.strNoDatabasesSelected), 2000);
+      Functions.ajaxShowMessage($('<div class="alert alert-warning" role="alert"></div>').text(Messages.strNoDatabasesSelected), 2000);
       return;
     }
     /**
      * @var question    String containing the question to be asked for confirmation
      */
-
-
     var question = Messages.strDropDatabaseStrongWarning + ' ' + Functions.sprintf(Messages.strDoYouReally, selectedDbs.join('<br>'));
-    var argsep = CommonParams.get('arg_separator');
-    $(this).confirm(question, 'index.php?route=/server/databases/destroy&' + $(this).serialize() + argsep + 'drop_selected_dbs=1', function (url) {
+    const modal = $('#dropDatabaseModal');
+    modal.find('.modal-body').html(question);
+    modal.modal('show');
+    const url = 'index.php?route=/server/databases/destroy&' + $(this).serialize();
+    $('#dropDatabaseModalDropButton').on('click', function () {
       Functions.ajaxShowMessage(Messages.strProcessingRequest, false);
       var parts = url.split('?');
       var params = Functions.getJsConfirmCommonParam(this, parts[1]);
@@ -69,37 +64,36 @@ AJAX.registerOnload('server/databases.js', function () {
           $databasesCount.text(newCount);
           $rowsToRemove.remove();
           $form.find('tbody').sortTable('.name');
-
           if ($form.find('tbody').find('tr').length === 0) {
             // user just dropped the last db on this page
             CommonActions.refreshMain();
           }
-
           Navigation.reload();
         } else {
           $form.find('tr.removeMe').removeClass('removeMe');
           Functions.ajaxShowMessage(data.error, false);
         }
-      }); // end $.post()
+      });
+      modal.modal('hide');
+      $('#dropDatabaseModalDropButton').off('click');
     });
-  }); // end of Drop Database action
+  });
 
   /**
    * Attach Ajax event handlers for 'Create Database'.
    */
-
   $(document).on('submit', '#create_database_form.ajax', function (event) {
     event.preventDefault();
-    var $form = $(this); // TODO Remove this section when all browsers support HTML5 "required" property
+    var $form = $(this);
 
+    // TODO Remove this section when all browsers support HTML5 "required" property
     var newDbNameInput = $form.find('input[name=new_db]');
-
     if (newDbNameInput.val() === '') {
       newDbNameInput.trigger('focus');
       alert(Messages.strFormEmpty);
       return;
-    } // end remove
-
+    }
+    // end remove
 
     Functions.ajaxShowMessage(Messages.strProcessingRequest);
     Functions.prepareForAjaxRequest($form);
@@ -109,30 +103,18 @@ AJAX.registerOnload('server/databases.js', function () {
         var $databasesCountObject = $('#filter-rows-count');
         var databasesCount = parseInt($databasesCountObject.text(), 10) + 1;
         $databasesCountObject.text(databasesCount);
-        Navigation.reload(); // make ajax request to load db structure page - taken from ajax.js
+        Navigation.reload();
 
+        // make ajax request to load db structure page - taken from ajax.js
         var dbStructUrl = data.url;
         dbStructUrl = dbStructUrl.replace(/amp;/ig, '');
         var params = 'ajax_request=true' + CommonParams.get('arg_separator') + 'ajax_page_request=true';
-
-        if (!(history && history.pushState)) {
-          params += MicroHistory.menus.getRequestParam();
-        }
-
         $.get(dbStructUrl, params, AJAX.responseHandler);
       } else {
         Functions.ajaxShowMessage(data.error, false);
       }
     }); // end $.post()
   }); // end $(document).on()
-
-  /* Don't show filter if number of databases are very few */
-
-  var databasesCount = $('#filter-rows-count').html();
-
-  if (databasesCount <= 10) {
-    $('#tableFilter').hide();
-  }
 
   var tableRows = $('.server_databases');
   $.each(tableRows, function () {

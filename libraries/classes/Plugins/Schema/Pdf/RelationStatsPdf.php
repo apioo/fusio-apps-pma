@@ -8,6 +8,7 @@ declare(strict_types=1);
 namespace PhpMyAdmin\Plugins\Schema\Pdf;
 
 use PhpMyAdmin\Plugins\Schema\RelationStats;
+
 use function sqrt;
 
 /**
@@ -18,10 +19,9 @@ use function sqrt;
  * master table's master field to foreign table's foreign key
  * in PDF document.
  *
- * @see     PMA_Schema_PDF::SetDrawColor PMA_Schema_PDF::setLineWidthScale
- *          Pdf::lineScale
- *
- * @name    Relation_Stats_Pdf
+ * @see Schema\Pdf::setDrawColor
+ * @see Schema\Pdf::setLineWidthScale
+ * @see Pdf::lineScale
  */
 class RelationStatsPdf extends RelationStats
 {
@@ -40,13 +40,7 @@ class RelationStatsPdf extends RelationStats
         $foreign_field
     ) {
         $this->wTick = 5;
-        parent::__construct(
-            $diagram,
-            $master_table,
-            $master_field,
-            $foreign_table,
-            $foreign_field
-        );
+        parent::__construct($diagram, $master_table, $master_field, $foreign_table, $foreign_field);
     }
 
     /**
@@ -56,12 +50,8 @@ class RelationStatsPdf extends RelationStats
      *
      * @param bool $showColor Whether to use one color per relation or not
      * @param int  $i         The id of the link to draw
-     *
-     * @return void
-     *
-     * @access public
      */
-    public function relationDraw($showColor, $i)
+    public function relationDraw($showColor, $i): void
     {
         if ($showColor) {
             $d = $i % 6;
@@ -102,17 +92,13 @@ class RelationStatsPdf extends RelationStats
             ];
             [$a, $b, $c] = $case[$d];
             $e = 1 - ($j - 1) / 6;
-            $this->diagram->SetDrawColor($a * 255 * $e, $b * 255 * $e, $c * 255 * $e);
+            $this->diagram->setDrawColor($a * 255 * $e, $b * 255 * $e, $c * 255 * $e);
         } else {
-            $this->diagram->SetDrawColor(0);
+            $this->diagram->setDrawColor(0);
         }
+
         $this->diagram->setLineWidthScale(0.2);
-        $this->diagram->lineScale(
-            $this->xSrc,
-            $this->ySrc,
-            $this->xSrc + $this->srcDir * $this->wTick,
-            $this->ySrc
-        );
+        $this->diagram->lineScale($this->xSrc, $this->ySrc, $this->xSrc + $this->srcDir * $this->wTick, $this->ySrc);
         $this->diagram->lineScale(
             $this->xDest + $this->destDir * $this->wTick,
             $this->yDest,
@@ -155,6 +141,6 @@ class RelationStatsPdf extends RelationStats
             $this->xDest + $this->destDir * (0.5 + 1 / $root2) * $this->wTick,
             $this->yDest - $this->wTick / $root2
         );
-        $this->diagram->SetDrawColor(0);
+        $this->diagram->setDrawColor(0);
     }
 }

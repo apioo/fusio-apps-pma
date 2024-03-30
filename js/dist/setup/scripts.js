@@ -1,20 +1,17 @@
-"use strict";
-
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
 /**
  * Functions used in Setup configuration forms
  */
 
-/* global displayErrors, getAllValues, getIdPrefix, validators */
-// js/config.js
+/* global displayErrors, getAllValues, getIdPrefix, validators */ // js/config.js
+
 // show this window in top frame
 if (top !== self) {
   window.top.location.href = location;
-} // ------------------------------------------------------------------
+}
+
+// ------------------------------------------------------------------
 // Messages
 //
-
 
 $(function () {
   if (window.location.protocol === 'https:') {
@@ -26,9 +23,7 @@ $(function () {
       return false;
     });
   }
-
   var hiddenMessages = $('.hiddenmessage');
-
   if (hiddenMessages.length > 0) {
     hiddenMessages.hide();
     var link = $('#show_hidden_messages');
@@ -40,8 +35,9 @@ $(function () {
     link.html(link.html().replace('#MSG_COUNT', hiddenMessages.length));
     link.show();
   }
-}); // set document width
+});
 
+// set document width
 $(function () {
   var width = 0;
   $('ul.tabs li').each(function () {
@@ -51,9 +47,12 @@ $(function () {
   width += 250;
   $('body').css('min-width', width);
   $('.tabs_contents').css('min-width', contentWidth);
-}); //
+});
+
+//
 // END: Messages
 // ------------------------------------------------------------------
+
 // ------------------------------------------------------------------
 // Form validation and field operations
 //
@@ -63,24 +62,22 @@ $(function () {
  *
  * @param {Element} parent  input field in <fieldset> or <fieldset>
  * @param {String}  id      validator id
- * @param {Object}  values  values hash {element1_id: value, ...}
+ * @param {object}  values  values hash {element1_id: value, ...}
+ *
+ * @return {bool|void}
  */
-
 function ajaxValidate(parent, id, values) {
-  var $parent = $(parent); // ensure that parent is a fieldset
-
+  var $parent = $(parent);
+  // ensure that parent is a fieldset
   if ($parent.attr('tagName') !== 'FIELDSET') {
     $parent = $parent.closest('fieldset');
-
     if ($parent.length === 0) {
       return false;
     }
   }
-
   if ($parent.data('ajax') !== null) {
     $parent.data('ajax').abort();
   }
-
   $parent.data('ajax', $.ajax({
     url: 'validate.php',
     cache: false,
@@ -90,14 +87,12 @@ function ajaxValidate(parent, id, values) {
       id: id,
       values: JSON.stringify(values)
     },
-    success: function success(response) {
+    success: function (response) {
       if (response === null) {
         return;
       }
-
       var error = {};
-
-      if (_typeof(response) !== 'object') {
+      if (typeof response !== 'object') {
         error[$parent.id] = [response];
       } else if (typeof response.error !== 'undefined') {
         error[$parent.id] = [response.error];
@@ -107,20 +102,18 @@ function ajaxValidate(parent, id, values) {
           error[key] = Array.isArray(value) ? value : [value];
         }
       }
-
       displayErrors(error);
     },
-    complete: function complete() {
+    complete: function () {
       $parent.removeData('ajax');
     }
   }));
   return true;
 }
+
 /**
  * Automatic form submission on change.
  */
-
-
 $(document).on('change', '.autosubmit', function (e) {
   e.target.form.submit();
 });
@@ -131,30 +124,31 @@ $.extend(true, validators, {
      * hide_db field
      *
      * @param {boolean} isKeyUp
+     *
+     * @return {true}
      */
-    hide_db: function hide_db(isKeyUp) {
+    hide_db: function (isKeyUp) {
       // eslint-disable-line camelcase
       if (!isKeyUp && this.value !== '') {
         var data = {};
         data[this.id] = this.value;
         ajaxValidate(this, 'Servers/1/hide_db', data);
       }
-
       return true;
     },
-
     /**
      * TrustedProxies field
      *
      * @param {boolean} isKeyUp
+     *
+     * @return {true}
      */
-    TrustedProxies: function TrustedProxies(isKeyUp) {
+    TrustedProxies: function (isKeyUp) {
       if (!isKeyUp && this.value !== '') {
         var data = {};
         data[this.id] = this.value;
         ajaxValidate(this, 'TrustedProxies', data);
       }
-
       return true;
     }
   },
@@ -164,48 +158,51 @@ $.extend(true, validators, {
      * Validates Server fieldset
      *
      * @param {boolean} isKeyUp
+     *
+     * @return {true}
      */
-    Server: function Server(isKeyUp) {
+    Server: function (isKeyUp) {
       if (!isKeyUp) {
         ajaxValidate(this, 'Server', getAllValues());
       }
-
       return true;
     },
-
     /**
      * Validates Server_login_options fieldset
      *
      * @param {boolean} isKeyUp
+     *
+     * @return {true}
      */
-    Server_login_options: function Server_login_options(isKeyUp) {
+    Server_login_options: function (isKeyUp) {
       // eslint-disable-line camelcase
       return validators.fieldset.Server.apply(this, [isKeyUp]);
     },
-
     /**
      * Validates Server_pmadb fieldset
      *
      * @param {boolean} isKeyUp
+     *
+     * @return {true}
      */
-    Server_pmadb: function Server_pmadb(isKeyUp) {
+    Server_pmadb: function (isKeyUp) {
       // eslint-disable-line camelcase
       if (isKeyUp) {
         return true;
       }
-
       var prefix = getIdPrefix($(this).find('input'));
-
       if ($('#' + prefix + 'pmadb').val() !== '') {
         ajaxValidate(this, 'Server_pmadb', getAllValues());
       }
-
       return true;
     }
   }
-}); //
+});
+
+//
 // END: Form validation and field operations
 // ------------------------------------------------------------------
+
 // ------------------------------------------------------------------
 // User preferences allow/disallow UI
 //
@@ -215,16 +212,15 @@ $(function () {
     if (this !== e.target) {
       return;
     }
-
     var el = $(this).find('input');
-
     if (el.prop('disabled')) {
       return;
     }
-
     el.prop('checked', !el.prop('checked'));
   });
-}); //
+});
+
+//
 // END: User preferences allow/disallow UI
 // ------------------------------------------------------------------
 

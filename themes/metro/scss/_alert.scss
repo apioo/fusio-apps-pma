@@ -1,5 +1,5 @@
 .alert {
-  text-align: $left;
+  text-align: left;
 
   a {
     text-decoration: underline;
@@ -13,6 +13,20 @@
 .alert-primary {
   color: $button-color;
   background-color: $blue-header;
+  background-image: none;
+
+  a {
+    color: $button-color;
+  }
+
+  h1 {
+    color: $navi-color;
+  }
+}
+
+.alert-info {
+  color: $button-color;
+  background-color: $navi-background-light;
   background-image: none;
 
   a {

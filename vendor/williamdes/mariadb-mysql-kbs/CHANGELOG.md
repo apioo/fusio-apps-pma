@@ -4,6 +4,259 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [v1.2.14]
+
+### Changed
+
+- [4e0db1e](https://github.com/williamdes/mariadb-mysql-kbs/commit/4e0db1e4fbfed4db6d7fee042f0127c8c6fe49f4) update: 🤖 Some updates 🤖
+- [1a00fee](https://github.com/williamdes/mariadb-mysql-kbs/commit/1a00fee805173cdd16529890c5e1750acb18ec2f) update: [MariaDB] updates
+- [61dabb8](https://github.com/williamdes/mariadb-mysql-kbs/commit/61dabb8615870f257df510aa776847143015161e) update: [MariaDB] updates
+- [4191cc3](https://github.com/williamdes/mariadb-mysql-kbs/commit/4191cc3f6dca9c0b45f7fe9edb6546a5cb9c5fc3) update: [MariaDB] && [MySQL] updates
+- [45f9a5b](https://github.com/williamdes/mariadb-mysql-kbs/commit/45f9a5b804ad247b49809e306124cc4626adced5) update: [MariaDB] updates
+- [90cd023](https://github.com/williamdes/mariadb-mysql-kbs/commit/90cd023cd653139da1a77fc7e66ca22090cd8794) update: [MariaDB] updates
+- [949efc5](https://github.com/williamdes/mariadb-mysql-kbs/commit/949efc519489d4ba0c61faaa9b595ce030f9497a) update: [MariaDB] updates
+- [d05a0f4](https://github.com/williamdes/mariadb-mysql-kbs/commit/d05a0f48a05170f2bfb19684aeabc8afc4bfec92) update: [MariaDB] && [MySQL] updates
+- [a637d2e](https://github.com/williamdes/mariadb-mysql-kbs/commit/a637d2e94a7c4ec0531d806a84ebe79db6e2407c) update: [MySQL] updates
+- [ff1fc4c](https://github.com/williamdes/mariadb-mysql-kbs/commit/ff1fc4c8594bcdf09dfc728f79fe536e63472012) update: [MariaDB] updates
+- [128a3b6](https://github.com/williamdes/mariadb-mysql-kbs/commit/128a3b67201abc717830760d0e8194133df18c88) update: [MariaDB] updates
+- [3ae4a1f](https://github.com/williamdes/mariadb-mysql-kbs/commit/3ae4a1f34ebee7416c369456e3b8fc70eb8ff6c7) update: [MariaDB] updates
+- [f4ff905](https://github.com/williamdes/mariadb-mysql-kbs/commit/f4ff9057a75d0c39d4f994b5cf5a93b871485536) update: [MariaDB] updates
+- [e4f6a92](https://github.com/williamdes/mariadb-mysql-kbs/commit/e4f6a923dd18e8b748f25bed491cafec9c4cd2fb) update: [MariaDB] updates
+- [6cb972f](https://github.com/williamdes/mariadb-mysql-kbs/commit/6cb972f63a82c9598ec215292a1988c79294d99c) update: [MySQL] updates
+- [a4adf6d](https://github.com/williamdes/mariadb-mysql-kbs/commit/a4adf6d4528fced180ddf87b1e79c0836d190182) update: [MariaDB] updates
+- [dbb0cab](https://github.com/williamdes/mariadb-mysql-kbs/commit/dbb0cabf6a9bc925cee0f995de870b83465fbf6b) update: [MariaDB] && [MySQL] updates
+- [f85d339](https://github.com/williamdes/mariadb-mysql-kbs/commit/f85d339d80c370c1ca6428540875adfaf02e758e) update: [MySQL] updates
+- [2425f11](https://github.com/williamdes/mariadb-mysql-kbs/commit/2425f11c900df98a943ada83270edb9d615b4339) update: [MariaDB] updates
+- [e77b759](https://github.com/williamdes/mariadb-mysql-kbs/commit/e77b7596bdf6f638748e81ddd045afb42ad1c8a2) update: [MariaDB] updates
+- [84e651d](https://github.com/williamdes/mariadb-mysql-kbs/commit/84e651d99fc0d7c1b6ed96470e699d306137d843) update: [MySQL] updates
+- [10d5cf7](https://github.com/williamdes/mariadb-mysql-kbs/commit/10d5cf7107b1c5f576d28062f2e50028ee0becd6) update: [MySQL] updates
+- [115a407](https://github.com/williamdes/mariadb-mysql-kbs/commit/115a40767d7c9790a949489eaca363a721f3bd06) update: [MariaDB] updates
+- [8a3fc60](https://github.com/williamdes/mariadb-mysql-kbs/commit/8a3fc60ac7e9a73848a5032f6f0f27f184bb085c) update: [MySQL] updates
+- [d9a691c](https://github.com/williamdes/mariadb-mysql-kbs/commit/d9a691cfb1b8c0e3e430b33976e2cd2d9572eef4) update: [MariaDB] updates
+- [0642bd1](https://github.com/williamdes/mariadb-mysql-kbs/commit/0642bd184f1b25a562358accdb646820c8cc2e30) update: [MariaDB] && [MySQL] updates
+- [f53bc86](https://github.com/williamdes/mariadb-mysql-kbs/commit/f53bc86aaae10d30f898598ec5930ee7ba6c9c85) update: [MariaDB] && [MySQL] updates
+- [8ed4c82](https://github.com/williamdes/mariadb-mysql-kbs/commit/8ed4c82675a0292a7e28cd37a5284cb378129ddd) update: [MariaDB] && [MySQL] updates
+- [7bef047](https://github.com/williamdes/mariadb-mysql-kbs/commit/7bef047cc9d62fbf694f7ac12d02aa10a66a4243) update: [MySQL] updates
+- [ce74236](https://github.com/williamdes/mariadb-mysql-kbs/commit/ce74236928f582b9d11b32cf5b2241a145a49f6b) update: [MariaDB] updates
+- [ad65873](https://github.com/williamdes/mariadb-mysql-kbs/commit/ad65873039e2d369faa5e22205e80ca4944f73af) update: [MySQL] updates
+- [ad4583d](https://github.com/williamdes/mariadb-mysql-kbs/commit/ad4583d53bb2fd847aca5bce89217531d0af4b73) update: [MySQL] updates
+- [54fbf31](https://github.com/williamdes/mariadb-mysql-kbs/commit/54fbf31043cc256c9fcb428298a1ff1af7ec5db5) update: [MariaDB] && [MySQL] updates
+- [5104adb](https://github.com/williamdes/mariadb-mysql-kbs/commit/5104adb9295b9ae05a74d36809ef0313fadd4198) update: [MariaDB] updates
+
+### Fixed
+
+- [42567a2](https://github.com/williamdes/mariadb-mysql-kbs/commit/42567a2ca369a00cc282fca21a42311827744b40) fix: --allow-empty for commits that are already made (maybe)
+- [eda616e](https://github.com/williamdes/mariadb-mysql-kbs/commit/eda616ee84768fdc07abd2eb014fcae67b763b5c) fix: broken data links
+- [e6e8f99](https://github.com/williamdes/mariadb-mysql-kbs/commit/e6e8f99a56e329d0fff051f58a498089284e0bcd) fix: remove keywords
+- [3d0a42f](https://github.com/williamdes/mariadb-mysql-kbs/commit/3d0a42f89937c342f975a90f7a15f30796cea840) fix: do not allow all default values to use the first <code> tag
+- [0f2b9ad](https://github.com/williamdes/mariadb-mysql-kbs/commit/0f2b9aded144661edc24623ac8816518c35152fc) fix: better implement default and key name handling
+- [a8e944e](https://github.com/williamdes/mariadb-mysql-kbs/commit/a8e944e3ba8e398c8b44e416d772403bc97d2b84) fix: improve range and type detection
+- [35f2c28](https://github.com/williamdes/mariadb-mysql-kbs/commit/35f2c28497902866c39bfd80727be1f2948b43b4) fix: also detect properly data type with a comment
+- [7f6c3a7](https://github.com/williamdes/mariadb-mysql-kbs/commit/7f6c3a715d4a8267c5804c082b2aaa5980795f09) fix: also handle "type" for data type
+- [62102a7](https://github.com/williamdes/mariadb-mysql-kbs/commit/62102a7b1425fb2a99ab64eef8a8b4354cb8d67b) fix: skip serialize if Range is empty
+- [d6ca996](https://github.com/williamdes/mariadb-mysql-kbs/commit/d6ca996010cc2f23ebbe73be3a0dbb4fc3578468) fix: drop useless data from mysql options list at MariaDB
+
+### Improvements
+
+- [5221f25](https://github.com/williamdes/mariadb-mysql-kbs/commit/5221f2518441501199c01702b46fa56f801819b0) style: remove non used import
+- [8c29dca](https://github.com/williamdes/mariadb-mysql-kbs/commit/8c29dca374a5529738759f1cad86839bfda59768) style: apply wdes/coding-standard 3.2 changes
+
+### Features
+
+- [ab411c2](https://github.com/williamdes/mariadb-mysql-kbs/commit/ab411c230adff9b5264cc0205eb83e59872ab86a) feat: implement some more small quirks to support more data
+- [9087cdc](https://github.com/williamdes/mariadb-mysql-kbs/commit/9087cdc6a2a01ac7f4504a40acb6aee4ca5ac9ec) feat: support "Range - 64 bit" and "Default Value - 64 bit"
+- [648d431](https://github.com/williamdes/mariadb-mysql-kbs/commit/648d431ff056bc0461a1635f5a4f4fbaed7e374a) feat: implement --dataset on the CLI and cleanup the CLI
+- [c834981](https://github.com/williamdes/mariadb-mysql-kbs/commit/c8349813e398362fbe9db68310e42e604d1ae330) feat: implement is_removed for mariadb variables
+- [668ece2](https://github.com/williamdes/mariadb-mysql-kbs/commit/668ece2d4b35e4a57655b1879fed41f1ad87f48d) feat: implement back finding type by description
+- [e870390](https://github.com/williamdes/mariadb-mysql-kbs/commit/e870390b37a212e018c23d346510ba326d872939) feat: implement more cases to handle range data
+- [5e62fb5](https://github.com/williamdes/mariadb-mysql-kbs/commit/5e62fb5fbbc51576bb3536a3cc10b4d28ebf0679) feat: implement has_description
+- [4e5d00f](https://github.com/williamdes/mariadb-mysql-kbs/commit/4e5d00f9ab143d97697dfd154b42bd574cc1429e) feat: implement back "upwards" on Range
+- [f2573fd](https://github.com/williamdes/mariadb-mysql-kbs/commit/f2573fdc1763fe6831e8715ada70199860abd710) feat: implement mariadb parsing
+- [7b57a5c](https://github.com/williamdes/mariadb-mysql-kbs/commit/7b57a5c3f02d9c5646556a57fe0b2bf4459d1381) feat: better implement back the searching for the anchor
+- [94c3137](https://github.com/williamdes/mariadb-mysql-kbs/commit/94c31373cd675f78a08cb66a6069887a2538a339) feat: handle floats and write all mysql files and use LF instead of CRLF
+- [3ea756d](https://github.com/williamdes/mariadb-mysql-kbs/commit/3ea756d9deb5bc21d3f2cd0c585122f90797dcb7) feat: implement writing files
+- [17f8046](https://github.com/williamdes/mariadb-mysql-kbs/commit/17f8046a942cac0000a68b5516248102631f30e2) feat: implement serializing data and more options
+- [e1c850a](https://github.com/williamdes/mariadb-mysql-kbs/commit/e1c850ad95ab076fa7c2f65725849ccb4d914fa9) feat: implement more fields of the struct
+- [31d57b3](https://github.com/williamdes/mariadb-mysql-kbs/commit/31d57b3d85705587de6adf9ab35c95852ac14c8a) feat: support rust cargo
+- [a3d4c9b](https://github.com/williamdes/mariadb-mysql-kbs/commit/a3d4c9b38c37e075b0cc48feb1db4bbee8c6e61d) feat: add a type to files
+- [5cca3f5](https://github.com/williamdes/mariadb-mysql-kbs/commit/5cca3f56267a8100c50d037e26be7c27cfbfa2b2) feat: add new MariaDB documentations
+- [ea189ee](https://github.com/williamdes/mariadb-mysql-kbs/commit/ea189ee6e564e4a2512512ef01c5f21053e692ca) feat: add missing URLs for MariaDB data
+- [f0a41ac](https://github.com/williamdes/mariadb-mysql-kbs/commit/f0a41ac5ddd7d9311dc98f82ce6752c3cff831fc) feat: add a script to find missing MariaDB data
+- [9389b9a](https://github.com/williamdes/mariadb-mysql-kbs/commit/9389b9a7b4f98818ea1d56c41038ee279dae5006) feat: add sql-error-log-plugin for MariaDB
+- [bd99d8d](https://github.com/williamdes/mariadb-mysql-kbs/commit/bd99d8d0e07c775c60ef06511dedf95860895bbb) feat: add allow-plugins to composer.json
+
+### Documentation
+
+- [2c6d0cf](https://github.com/williamdes/mariadb-mysql-kbs/commit/2c6d0cf808d361f5458f47479e136b689c5547a0) docs: update CHANGELOG.md
+- [9a5f284](https://github.com/williamdes/mariadb-mysql-kbs/commit/9a5f2848a9c3655fdfe9b9476a35704d0b2ae9cb) docs: replace LGTM.com that will shut-down in december by rust-reportcard.xuri.me
+- [0160852](https://github.com/williamdes/mariadb-mysql-kbs/commit/01608529cecd8094d84fa2131028b271e046fe89) docs: fix some phpdocs that are nullable
+- [833ab62](https://github.com/williamdes/mariadb-mysql-kbs/commit/833ab62e7315ad2da9eb9e6a9fe8118a120efffd) docs: update my website link
+- [a800a45](https://github.com/williamdes/mariadb-mysql-kbs/commit/a800a4550b1d3fa9f069a3526297aa1182e893d0) docs: drop non working dependency badge
+
+### Others
+
+- [1179505](https://github.com/williamdes/mariadb-mysql-kbs/commit/11795050f328a952809712e2e99a85b562e3c53c) chore: exclude test files from composer archive
+- [b2fced3](https://github.com/williamdes/mariadb-mysql-kbs/commit/b2fced3406bcf11e4945b315e18eb517965c54a5) ci: add flags to codecov config and threshold
+- [4ef6f98](https://github.com/williamdes/mariadb-mysql-kbs/commit/4ef6f982c973fe8ad4df02c10f782d890625c78d) chore: drop non used PHP commented out code
+- [7ec1649](https://github.com/williamdes/mariadb-mysql-kbs/commit/7ec16491d79492dbac1f110fed462525ce80fd8d) ci: add codecov.yml config
+- [7cb1d91](https://github.com/williamdes/mariadb-mysql-kbs/commit/7cb1d918c37cc3b1582170a45c52ac6b7e2f2561) chore: bump to rc2
+- [2b6276b](https://github.com/williamdes/mariadb-mysql-kbs/commit/2b6276b1c142df29b9db7c9988fbd93f61878484) chore: remove a useless comment
+- [14ba5cd](https://github.com/williamdes/mariadb-mysql-kbs/commit/14ba5cd5f809fe67f8cee7e8181c2799a086afa4) ci: report coverage in a different way
+- [b1e6617](https://github.com/williamdes/mariadb-mysql-kbs/commit/b1e6617af75dec0e6813f6f7598818c34243a526) ci: fix set-output deprecation
+- [514dc35](https://github.com/williamdes/mariadb-mysql-kbs/commit/514dc3543218750a82aece011d9403ec22679a22) ci: make some CIs run on file changes and not always
+- [dca1c9b](https://github.com/williamdes/mariadb-mysql-kbs/commit/dca1c9b807cade479e87ef9168d49bd4087d3d51) chore: upgrade js dependencies and remove crawler
+- [7cea6f2](https://github.com/williamdes/mariadb-mysql-kbs/commit/7cea6f253a86a0e3ef2d9fc935b40ad2770ac766) chore: exclude src/rust and Cargo.{toml,lock}
+- [7303b5b](https://github.com/williamdes/mariadb-mysql-kbs/commit/7303b5b4753584638be157ff2e574b67e1c43c5c) ci: limit Rust CIs to changed files in src/rust
+- [223edb4](https://github.com/williamdes/mariadb-mysql-kbs/commit/223edb484755c1693e5f021deeda5819329899af) ci: fixup cron
+- [952ab6e](https://github.com/williamdes/mariadb-mysql-kbs/commit/952ab6e065fd75987e739268c732fe6e82d4be35) ci: build
+- [0441d2f](https://github.com/williamdes/mariadb-mysql-kbs/commit/0441d2f18eae7015f40022379c786693548bf25c) chore: move parser test to .rs
+- [7f60823](https://github.com/williamdes/mariadb-mysql-kbs/commit/7f608237b2c400d887e04e1d87ea1898533e5648) chore: update test case 4 to remove a specific case that does not exist anymore, add tests, and implement a missing syntax
+- [3c3a23e](https://github.com/williamdes/mariadb-mysql-kbs/commit/3c3a23eb358e196d26e888f4f07be476544a0a74) chore: remove non used commented code
+- [f83060a](https://github.com/williamdes/mariadb-mysql-kbs/commit/f83060a046fb857b0f431d5cb1bf7cbde2c2607a) ci: remove non necessary grov config
+- [da5c7d7](https://github.com/williamdes/mariadb-mysql-kbs/commit/da5c7d7c609ea0065b49f0fd619c1e63ff6365a8) ci: cache cargo binaries and install grcov from cargo
+- [bbc82fe](https://github.com/williamdes/mariadb-mysql-kbs/commit/bbc82fedcc0f8ddc7baff72da2d80e5d1a552a63) chore: ignore new coverage files
+- [25fecb1](https://github.com/williamdes/mariadb-mysql-kbs/commit/25fecb1973cf3c272f4061008251720f3dfdf570) ci: remove verbose on codecov
+- [3972cfc](https://github.com/williamdes/mariadb-mysql-kbs/commit/3972cfc25bb7dfd287d0b00f9fb4298c299fa3b3) ci: fix dedupe workflows
+- [0614775](https://github.com/williamdes/mariadb-mysql-kbs/commit/06147759be0341e6f144b97ef142c1d679131a29) ci: add missing component and fix bash commands
+- [7475be1](https://github.com/williamdes/mariadb-mysql-kbs/commit/7475be1a253d2cc10deeadad88aa8c769a3e2b6b) ci: manually use grcov
+- [c2fd0f5](https://github.com/williamdes/mariadb-mysql-kbs/commit/c2fd0f529b8bf7ba6e6731d7174b1aad2b3e8847) ci: add cancel in progress workflow
+- [ce45275](https://github.com/williamdes/mariadb-mysql-kbs/commit/ce45275d27c94d6636836ffb9518c38b78ce2c63) ci: add debug step
+- [8a8dad9](https://github.com/williamdes/mariadb-mysql-kbs/commit/8a8dad9cb45e83461a866d24272940bc21da527a) ci: remove filter: covered
+- [b4786c7](https://github.com/williamdes/mariadb-mysql-kbs/commit/b4786c725644342231bd5367f5309b49a034cb21) ci: try to fixup cargo flags
+- [e5bd8cd](https://github.com/williamdes/mariadb-mysql-kbs/commit/e5bd8cd3d9ac6c511fe0587c0c16c85a336902ed) ci: add Rust code coverage
+- [d95e54f](https://github.com/williamdes/mariadb-mysql-kbs/commit/d95e54f4d52896959e9d6aabfc0674ab1e832df4) ci: add a workflow to build and test Rust code
+- [aa239fa](https://github.com/williamdes/mariadb-mysql-kbs/commit/aa239fa7c9c3f5f017080e2df9368cd0604b07f6) chore: update editorconfig for 2 spaces for data files
+- [627ce21](https://github.com/williamdes/mariadb-mysql-kbs/commit/627ce21b5c7d670c29ec0d0916fc0d1e1ee87de2) chore: re-implement most of the MySQL parser
+- [057a5d6](https://github.com/williamdes/mariadb-mysql-kbs/commit/057a5d631842ea17ec74a8d58b8872af71a96fea) chore: rustify the mysql.rs file
+- [3340ac8](https://github.com/williamdes/mariadb-mysql-kbs/commit/3340ac84f4da65e1877df24bc837c5e3d431855f) chore: move mysql.js to mysql.rs
+- [2c61433](https://github.com/williamdes/mariadb-mysql-kbs/commit/2c614333158cb3b36ba2e72e3f6dedd3dc7c78bb) chore: re-build cleaner.js to Rust
+- [2393ada](https://github.com/williamdes/mariadb-mysql-kbs/commit/2393ada322758c04d730b86fca36a2047f5fcf10) chore: move cleaner.rs to Rust code
+- [71d6974](https://github.com/williamdes/mariadb-mysql-kbs/commit/71d6974466a4e50139ff8d6121c45b84b027e101) chore: move JS code into Rust code
+- [fe2e067](https://github.com/williamdes/mariadb-mysql-kbs/commit/fe2e067d57159583f81ece3fbdf214ac750f6d4f) chore: refurbish the Rust implementation from 2 years ago
+- [c4660a9](https://github.com/williamdes/mariadb-mysql-kbs/commit/c4660a9385caaeed29b37e9dcd3d89a7b6f82a91) chore: only publish necessary dist files on NPM
+- [adf3ae4](https://github.com/williamdes/mariadb-mysql-kbs/commit/adf3ae4f108835948b45d3785d37691b2bbf2937) chore: move variables from data to data/variables
+- [1d4d52a](https://github.com/williamdes/mariadb-mysql-kbs/commit/1d4d52a1888a614963f4e74a568047559eddd562) ci: add permissions on workflows
+- [56d5b4d](https://github.com/williamdes/mariadb-mysql-kbs/commit/56d5b4d1a119f236638ff430ade79f8286aaed96) ci: bump sudo-bot/action-pull-request-lock to v1.1.0
+- [094c0b4](https://github.com/williamdes/mariadb-mysql-kbs/commit/094c0b45276e6c0db222ab6f4ce7f81275dca456) ci: bump sudo-bot/action-pull-request-merge to v1.2.0
+- [6db6be0](https://github.com/williamdes/mariadb-mysql-kbs/commit/6db6be06dc1e0505e8ab61a19b9b3a10f8e56e42) chore: also resolve documentation URLs for better final matches
+- [766014b](https://github.com/williamdes/mariadb-mysql-kbs/commit/766014b908e9fccc532217ce4a089bd8b205d85b) chore: require node 14
+- [5bf9152](https://github.com/williamdes/mariadb-mysql-kbs/commit/5bf9152e6eac3adaefa8fb466e121f488e2f72c6) ci: use node 18
+- [ef24a6d](https://github.com/williamdes/mariadb-mysql-kbs/commit/ef24a6da39d84f409f6338d50105e4cf6d12f61c) ci: change the node versions we test
+- [d942dd6](https://github.com/williamdes/mariadb-mysql-kbs/commit/d942dd669173c363821ed0f7c646f9c05a6b206b) chore: bump all packages
+- [c9d0d2b](https://github.com/williamdes/mariadb-mysql-kbs/commit/c9d0d2bf8f64eb7c545d1614c93b2d02a3670ad9) chore: drop dependabot
+- [0794398](https://github.com/williamdes/mariadb-mysql-kbs/commit/07943987a685eb9dc5ce48a8379672d9c15b8114) chore: bump actions/setup-node to v3
+- [8a2ef6e](https://github.com/williamdes/mariadb-mysql-kbs/commit/8a2ef6e54679083722da3d3aca72ad0504a0e9b1) ci: upgrade to actions/checkout@v3
+- [aef8c79](https://github.com/williamdes/mariadb-mysql-kbs/commit/aef8c79a0b625e1a16af2a80ce81652607d3806f) chore: improve coding standard config
+- [9368b22](https://github.com/williamdes/mariadb-mysql-kbs/commit/9368b22f72140f1a5bad0bd731e14816cd6f3b52) chore: improve composer commands
+- [c189c7a](https://github.com/williamdes/mariadb-mysql-kbs/commit/c189c7a93baf5603ebf0dc24383fc5e087612798) ci: bump actions cache to v3
+
+## [v1.2.13]
+
+### Changed
+
+- [e96314f](https://github.com/williamdes/mariadb-mysql-kbs/commit/e96314f47373a45c1829a91d1cd5fa574343ea4a) update: [MariaDB] && [MySQL] updates
+- [d4cbcc7](https://github.com/williamdes/mariadb-mysql-kbs/commit/d4cbcc7acf033e7cf4a22aeda749f9870e2d1beb) update: [MariaDB] updates
+- [6d0aed2](https://github.com/williamdes/mariadb-mysql-kbs/commit/6d0aed2a94f4247655cc1ccbd47a1950abac6eb3) update: [MariaDB] && [MySQL] updates
+- [6646d76](https://github.com/williamdes/mariadb-mysql-kbs/commit/6646d764c62136474f0ffaa42ba7bb1a324f3c0f) update: [MySQL] updates
+- [be98073](https://github.com/williamdes/mariadb-mysql-kbs/commit/be9807377b13d08ed6998ae185400d27686f4f38) update: [MariaDB] && [MySQL] updates
+- [f6fd5f6](https://github.com/williamdes/mariadb-mysql-kbs/commit/f6fd5f6a2f06d4116266833b3f68d7a8a1d10be6) update: [MariaDB] && [MySQL] updates
+- [cb8f850](https://github.com/williamdes/mariadb-mysql-kbs/commit/cb8f850bb4cf0b9619986313696d476aad53e8ee) update: [MariaDB] updates
+- [05e1883](https://github.com/williamdes/mariadb-mysql-kbs/commit/05e18834cbd44f544d8a131a477f90af9df439f0) update: [MariaDB] updates
+- [15deeb9](https://github.com/williamdes/mariadb-mysql-kbs/commit/15deeb9672cb3309adcdd7b2554e5abb5e6ebc56) update: [MySQL] updates
+- [1a8bf0a](https://github.com/williamdes/mariadb-mysql-kbs/commit/1a8bf0a2c31013b3bcf11f0862ef0e39f5b9ba74) update: [MariaDB] updates
+- [90a0b26](https://github.com/williamdes/mariadb-mysql-kbs/commit/90a0b26638e67e32e230a1a1022878dbe8e7dd35) update: [MariaDB] && [MySQL] updates
+- [50ab914](https://github.com/williamdes/mariadb-mysql-kbs/commit/50ab914b6df67ce5a4d63121bd8b1772bcadf872) update: [MariaDB] && [MySQL] updates
+- [4b57142](https://github.com/williamdes/mariadb-mysql-kbs/commit/4b57142e4705617280ad3da9729240348b494f90) update: [MySQL] updates
+- [daa313e](https://github.com/williamdes/mariadb-mysql-kbs/commit/daa313ea4fc19400ddc6fb5350dc79daf85d1a21) update: [MySQL] updates
+- [1f02417](https://github.com/williamdes/mariadb-mysql-kbs/commit/1f024175e0deb70eff34e36d7305b58c0cef68d4) update: [MySQL] updates
+- [bc011b7](https://github.com/williamdes/mariadb-mysql-kbs/commit/bc011b7ea4f36b10de81c4f58f55b6ff079ff2e2) update: [MariaDB] updates
+- [925f01f](https://github.com/williamdes/mariadb-mysql-kbs/commit/925f01fd8dae8f8e4a72e680bce6223f1ab1084b) update: [MariaDB] updates
+- [1eb110b](https://github.com/williamdes/mariadb-mysql-kbs/commit/1eb110b8c9238a88d406f0e232d63d8aa3d18053) update: [MariaDB] && [MySQL] updates
+- [886d599](https://github.com/williamdes/mariadb-mysql-kbs/commit/886d599fb4ecd2e886629c177b2f9815c1fae957) update: [MariaDB] && [MySQL] updates
+- [fbc1e98](https://github.com/williamdes/mariadb-mysql-kbs/commit/fbc1e98d0c4b98506b03ee30b60ee08fdbbe9440) update: [MySQL] updates
+- [4726cd1](https://github.com/williamdes/mariadb-mysql-kbs/commit/4726cd1c799e3dad815f7113f3e62a7f383a7f40) update: [MariaDB] && [MySQL] updates
+- [b7bc2db](https://github.com/williamdes/mariadb-mysql-kbs/commit/b7bc2dbf779c55c13f804a1cc4ce459e46f0e3e0) update: [MariaDB] && [MySQL] updates
+- [ef773a7](https://github.com/williamdes/mariadb-mysql-kbs/commit/ef773a7a118e275b98b57cf18d0ad6cbfe514def) update: [MariaDB] && [MySQL] updates
+- [9837411](https://github.com/williamdes/mariadb-mysql-kbs/commit/9837411eedb53b0cb61047699ad7081480f9c458) update: [MariaDB] && [MySQL] updates
+- [1da68a2](https://github.com/williamdes/mariadb-mysql-kbs/commit/1da68a28fcbcf1f9fa9f886aab84526b0408424b) update: [MySQL] updates
+- [8b290ce](https://github.com/williamdes/mariadb-mysql-kbs/commit/8b290ce7109586eca5a259f63cda60551da8ab61) update: [MySQL] updates
+- [9a30263](https://github.com/williamdes/mariadb-mysql-kbs/commit/9a302637313e79c392467e28c925a39ab573b61d) update: [MySQL] updates
+- [a1fbb55](https://github.com/williamdes/mariadb-mysql-kbs/commit/a1fbb55335510afabfe1b544564f24639ad6f668) update: [MySQL] updates
+
+### Fixed
+
+- [a402856](https://github.com/williamdes/mariadb-mysql-kbs/commit/a4028565d062339f18a504f39c61cfa04a962802) fix: exclude merge.php from Doctum
+- [c69d529](https://github.com/williamdes/mariadb-mysql-kbs/commit/c69d5296b09e7a5478b23d00ab865e3b3564a0cd) fix: cleanup the accepted values for an enum
+- [2104623](https://github.com/williamdes/mariadb-mysql-kbs/commit/21046232efaa4f5ec355477fe50b0dab19a44ca2) fix: MariaDb enum values without a code tag
+- [66c6992](https://github.com/williamdes/mariadb-mysql-kbs/commit/66c69927e3945cdc65f7919e7a757bd50dfe75c3) fix: create PR script install in "/usr/local/bin"
+- [4f10b0e](https://github.com/williamdes/mariadb-mysql-kbs/commit/4f10b0eb4f2551fa1d2643fead412bb8b6f9dd2d) fix: yarn binary path
+- [de8ef42](https://github.com/williamdes/mariadb-mysql-kbs/commit/de8ef42628bcfeb04627aa850783d88d82046ba6) fix: binary path for sudo-bot
+- [c1528ea](https://github.com/williamdes/mariadb-mysql-kbs/commit/c1528ea35b0838ceefc18dbbf82141848a8c0213) fix: coding standard migration mistake
+- [de8945b](https://github.com/williamdes/mariadb-mysql-kbs/commit/de8945b622f3360245784f7fa7653537c72b592b) fix: data URLs
+- [0f31076](https://github.com/williamdes/mariadb-mysql-kbs/commit/0f31076dae1ebe2af5c13521e6a2031bc2381f14) fix: do not try to match another scope than global or session for MariaDB
+
+### Improvements
+
+- [0e7508c](https://github.com/williamdes/mariadb-mysql-kbs/commit/0e7508c01dfc6bb783032345007cab8b2bdbb603) style: stop using old array syntax
+- [2784c48](https://github.com/williamdes/mariadb-mysql-kbs/commit/2784c48571fb629758f821bef07e55729efcf98c) style: coding standard fixes and ignore for tests
+- [ce5e57b](https://github.com/williamdes/mariadb-mysql-kbs/commit/ce5e57b79cf9fb7e7960dcef6bd0df94c58162c4) style: run prettier
+- [daeec8f](https://github.com/williamdes/mariadb-mysql-kbs/commit/daeec8f36ab548854fc035fed214d2887f563a34) style: migrate to wdes/coding-standard and composer json cleanup
+
+### Features
+
+- [1b8f387](https://github.com/williamdes/mariadb-mysql-kbs/commit/1b8f3874c595b9ee5991041c4926ce062e80bef4) feat: pass phpstan v1 max level
+- [0273dbf](https://github.com/williamdes/mariadb-mysql-kbs/commit/0273dbfdfa6c7b808954235fd40c9897ad8ad121) feat: simplify PHP 8 composer installs
+- [7c6a94e](https://github.com/williamdes/mariadb-mysql-kbs/commit/7c6a94e557d593b2cd168a462c43dbbac2b1b52c) feat: add new S3 data file
+- [29960a3](https://github.com/williamdes/mariadb-mysql-kbs/commit/29960a349e49bb6be5e299593f6dd6829cae5a25) feat: add new data sets
+
+### Documentation
+
+- [b0af14e](https://github.com/williamdes/mariadb-mysql-kbs/commit/b0af14ef9e78259da65be9fc3756013fe50dc7b4) docs: update CHANGELOG
+- [41631bf](https://github.com/williamdes/mariadb-mysql-kbs/commit/41631bf402f20242aa55e2f2815488dafe9508de) docs: add FUNDING and SECURITY
+- [474885d](https://github.com/williamdes/mariadb-mysql-kbs/commit/474885d4eb22a3bab8e81b72dd7cf002a5723c29) docs: update docs submodule
+
+### Others
+
+- [5a708dd](https://github.com/williamdes/mariadb-mysql-kbs/commit/5a708ddd0d444fde62eee557350677ffb538ea23) chore: do not try to change version in composer.json
+- [b492531](https://github.com/williamdes/mariadb-mysql-kbs/commit/b492531f6ee0eb067ef6cea95b7039729d8acd8d) ci: set back coverage to xdebug for PHP 7.1
+- [095d6bf](https://github.com/williamdes/mariadb-mysql-kbs/commit/095d6bfbd2bd71665959d824f2edfdfa667da6a2) ci: set PHP 8.1 as a normal tested version and nightly as an experimental version
+- [848c359](https://github.com/williamdes/mariadb-mysql-kbs/commit/848c359c933f90568ff65ce4a6efb9267430c968) chore: ignore composer.lock
+- [7f56820](https://github.com/williamdes/mariadb-mysql-kbs/commit/7f5682015cb6728ab7871da69d92e49a112ed213) chore: remove version field from composer.json
+- [ed98920](https://github.com/williamdes/mariadb-mysql-kbs/commit/ed98920339eecdae90c986a6c7dc8e11337add96) chore: upgrade phpstan to ^1.2.0
+- [4dc14cd](https://github.com/williamdes/mariadb-mysql-kbs/commit/4dc14cd791e74e929274b6a276d8b8c80015a2a6) ci: do not require SKIP_DOCS_STEPS ENV
+- [624b71e](https://github.com/williamdes/mariadb-mysql-kbs/commit/624b71e435557946d45ea387abe4d6bcf32f5a09) chore: update jshint, mocha, prettier
+- [af0326c](https://github.com/williamdes/mariadb-mysql-kbs/commit/af0326c04ccefffed1f1bbe26c5f086387985883) ci: add new workflow environment names
+- [2e6ae05](https://github.com/williamdes/mariadb-mysql-kbs/commit/2e6ae05b8fa1ba7ba8339ecb10a5baa09a112ae0) chore: update dependencies
+- [a5a3627](https://github.com/williamdes/mariadb-mysql-kbs/commit/a5a36270c7a1423d404dbeb21257ed3556af0fc5) ci: fix workflow
+- [12cb0c7](https://github.com/williamdes/mariadb-mysql-kbs/commit/12cb0c705abedc4f7eca992fc8e32c41dc68b905) ci: adjust lint and analyse CI config and run tests on PHP 8.1
+- [9c72287](https://github.com/williamdes/mariadb-mysql-kbs/commit/9c7228749af60ad40f2f522803a518bb21f54921) ci: test on node 12, 14, 15, 16
+- [6954d32](https://github.com/williamdes/mariadb-mysql-kbs/commit/6954d326fdda0b041396997112fe3c45a56541c2) chore: require node 12
+- [13bf7a5](https://github.com/williamdes/mariadb-mysql-kbs/commit/13bf7a53327c9b89a32ec95bdc27e2469f478a01) chore: upgrade jshint, mocha, prettier
+- [e120770](https://github.com/williamdes/mariadb-mysql-kbs/commit/e12077002cae75b0ac2d3f5515ac6d7d21fca403) ci: remove sudo for pages build
+- [8e31e3b](https://github.com/williamdes/mariadb-mysql-kbs/commit/8e31e3b5bdf748cc3454deed0c113fb37815b4df) ci: remove composer arguments
+- [2552a4b](https://github.com/williamdes/mariadb-mysql-kbs/commit/2552a4b103ffcf73635c67150fff95f47696d061) ci: use different templates for each workflow
+- [2944134](https://github.com/williamdes/mariadb-mysql-kbs/commit/294413447143adf4c4a525eec5327fba67d88124) ci: allow access to secrets
+- [ca5bb42](https://github.com/williamdes/mariadb-mysql-kbs/commit/ca5bb42fd68d0ba38b761f75368af6e3c3364618) ci: handle non docs workflow
+- [3cc68cb](https://github.com/williamdes/mariadb-mysql-kbs/commit/3cc68cb8c8f2a7365a78d710e8087d704107b5a7) ci: fix NodeJs not expanding ~ of paths
+- [852e2c3](https://github.com/williamdes/mariadb-mysql-kbs/commit/852e2c3f7fc13729b7a91800a5718d8725b295a5) ci: fix build process missing files
+- [80eb36d](https://github.com/williamdes/mariadb-mysql-kbs/commit/80eb36dcdf817da45c7a392d7a268cb9dcfc0eaa) ci: use non relative paths for some file arguments on sudo-bot
+- [61263ca](https://github.com/williamdes/mariadb-mysql-kbs/commit/61263ca257ead278e377748bce45ed9fb8f2d25f) ci: fix secret for sudo-bot GPG passphrase
+- [547e15e](https://github.com/williamdes/mariadb-mysql-kbs/commit/547e15ece69560a45556916edc7e7a58d99ce576) ci: remove duplicates lines on the sudo-bot script That simple..., wtf keyboard what did you do /o\
+- [a208602](https://github.com/williamdes/mariadb-mysql-kbs/commit/a2086022e8c68c151fcc0cf29753e2aa0430cf1d) ci: add more debugs for sudo-bot script What is wrong ? :/
+- [c8255a2](https://github.com/williamdes/mariadb-mysql-kbs/commit/c8255a254c6fc782a86ce8a62050662558914628) ci: fix sudo-bot, use bash instead of sh
+- [3f0f318](https://github.com/williamdes/mariadb-mysql-kbs/commit/3f0f3185a346292a16ee71e0f9b9db4279545e0b) ci: debug command line issue
+- [fa11e54](https://github.com/williamdes/mariadb-mysql-kbs/commit/fa11e54d410ba435f660afed58ee80d275b4be18) ci: use bash equals for sudo-bot
+- [4329113](https://github.com/williamdes/mariadb-mysql-kbs/commit/432911397912e4fd29d513058ed7be9b571c09a3) ci: fix move to root dir for API docs
+- [373a22f](https://github.com/williamdes/mariadb-mysql-kbs/commit/373a22febd0253d04a5c6c656633878b49b08987) ci: rename cache to tmp
+- [085abed](https://github.com/williamdes/mariadb-mysql-kbs/commit/085abeda4486d41ee274b5ee72b33fa11b14796c) ci: fetch all the repository to have the gh-pages branch available
+- [43d7ecd](https://github.com/williamdes/mariadb-mysql-kbs/commit/43d7ecd45999b0720ca7bd9939c1c6727d00332a) ci: fix root dir path for sudo-bot docs
+- [5cfd151](https://github.com/williamdes/mariadb-mysql-kbs/commit/5cfd151f09e78643ac42dc2c4029069eadd2ad8c) ci: make sudo-bot script executable
+- [44293ad](https://github.com/williamdes/mariadb-mysql-kbs/commit/44293ad4f9bb3377c237e75f0d7591eec59963e6) ci: fix PHP documentation workflow
+- [6b0f012](https://github.com/williamdes/mariadb-mysql-kbs/commit/6b0f012cfec344d8b49b7a3fb9e788d3e1f50a5f) ci: drop all the old sudo-bot process and re-build it
+- [dcad6c8](https://github.com/williamdes/mariadb-mysql-kbs/commit/dcad6c83674b26f50885281bd03d51c3cade077b) ci: rename GPG_PRIV_PASSWORD ENV to GPG_PASSPHRASE
+- [3ba3766](https://github.com/williamdes/mariadb-mysql-kbs/commit/3ba37668d67e29b31ac0f96c860d279464298f47) chore: upgrade chai and mocha
+- [e48d0c0](https://github.com/williamdes/mariadb-mysql-kbs/commit/e48d0c01895a397198b6751fafd310420b15e575) ci: Update actions/checkout to v2
+
 ## [v1.2.12]
 
 ### Changed
@@ -606,6 +859,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - [d9cd2a8](https://github.com/williamdes/mariadb-mysql-kbs/commit/d9cd2a8123a67d6adfddf0414988b98fcac9f082) fixed: bug in MariaDB script
 
 
+[v1.2.14]: https://github.com/williamdes/mariadb-mysql-kbs/compare/v1.2.13...v1.2.14
+[v1.2.13]: https://github.com/williamdes/mariadb-mysql-kbs/compare/v1.2.12...v1.2.13
 [v1.2.12]: https://github.com/williamdes/mariadb-mysql-kbs/compare/v1.2.11...v1.2.12
 [v1.2.11]: https://github.com/williamdes/mariadb-mysql-kbs/compare/v1.2.10...v1.2.11
 [v1.2.10]: https://github.com/williamdes/mariadb-mysql-kbs/compare/v1.2.9...v1.2.10

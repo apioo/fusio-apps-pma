@@ -1,12 +1,11 @@
 <?php
+
 declare(strict_types = 1);
+
 namespace Williamdes\MariaDBMySQLKBS;
 
-use \Exception;
+use Exception;
 
-/**
- * KBException class
- */
 class KBException extends Exception
 {
 }

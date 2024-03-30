@@ -1,7 +1,4 @@
 <?php
-/**
- * Parses an array.
- */
 
 declare(strict_types=1);
 
@@ -11,6 +8,7 @@ use PhpMyAdmin\SqlParser\Component;
 use PhpMyAdmin\SqlParser\Parser;
 use PhpMyAdmin\SqlParser\Token;
 use PhpMyAdmin\SqlParser\TokensList;
+
 use function implode;
 use function is_array;
 use function strlen;
@@ -18,26 +16,28 @@ use function trim;
 
 /**
  * Parses an array.
+ *
+ * @final
  */
 class ArrayObj extends Component
 {
     /**
      * The array that contains the unprocessed value of each token.
      *
-     * @var array
+     * @var string[]
      */
     public $raw = [];
 
     /**
      * The array that contains the processed value of each token.
      *
-     * @var array
+     * @var string[]
      */
     public $values = [];
 
     /**
-     * @param array $raw    the unprocessed values
-     * @param array $values the processed values
+     * @param string[] $raw    the unprocessed values
+     * @param string[] $values the processed values
      */
     public function __construct(array $raw = [], array $values = [])
     {
@@ -46,9 +46,9 @@ class ArrayObj extends Component
     }
 
     /**
-     * @param Parser     $parser  the parser that serves as context
-     * @param TokensList $list    the list of tokens that are being parsed
-     * @param array      $options parameters for parsing
+     * @param Parser               $parser  the parser that serves as context
+     * @param TokensList           $list    the list of tokens that are being parsed
+     * @param array<string, mixed> $options parameters for parsing
      *
      * @return ArrayObj|Component[]
      */
@@ -87,8 +87,6 @@ class ArrayObj extends Component
         for (; $list->idx < $list->count; ++$list->idx) {
             /**
              * Token parsed at this moment.
-             *
-             * @var Token
              */
             $token = $list->tokens[$list->idx];
 
@@ -98,18 +96,13 @@ class ArrayObj extends Component
             }
 
             // Skipping whitespaces and comments.
-            if (($token->type === Token::TYPE_WHITESPACE)
-                || ($token->type === Token::TYPE_COMMENT)
-            ) {
+            if (($token->type === Token::TYPE_WHITESPACE) || ($token->type === Token::TYPE_COMMENT)) {
                 $lastRaw .= $token->token;
                 $lastValue = trim($lastValue) . ' ';
                 continue;
             }
 
-            if (($brackets === 0)
-                && (($token->type !== Token::TYPE_OPERATOR)
-                || ($token->value !== '('))
-            ) {
+            if (($brackets === 0) && (($token->type !== Token::TYPE_OPERATOR) || ($token->value !== '('))) {
                 $parser->error('An opening bracket was expected.', $token);
                 break;
             }
@@ -159,9 +152,7 @@ class ArrayObj extends Component
         //      [a,] => ['a', '']
         //      [a]  => ['a']
         $lastRaw = trim($lastRaw);
-        if (empty($options['type'])
-            && ((strlen($lastRaw) > 0) || ($isCommaLast))
-        ) {
+        if (empty($options['type']) && ((strlen($lastRaw) > 0) || ($isCommaLast))) {
             $ret->raw[] = $lastRaw;
             $ret->values[] = trim($lastValue);
         }
@@ -170,8 +161,8 @@ class ArrayObj extends Component
     }
 
     /**
-     * @param ArrayObj|ArrayObj[] $component the component to be built
-     * @param array               $options   parameters for building
+     * @param ArrayObj|ArrayObj[]  $component the component to be built
+     * @param array<string, mixed> $options   parameters for building
      *
      * @return string
      */
@@ -179,7 +170,9 @@ class ArrayObj extends Component
     {
         if (is_array($component)) {
             return implode(', ', $component);
-        } elseif (! empty($component->raw)) {
+        }
+
+        if (! empty($component->raw)) {
             return '(' . implode(', ', $component->raw) . ')';
         }
 

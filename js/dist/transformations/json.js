@@ -1,5 +1,3 @@
-"use strict";
-
 /**
  * JSON syntax highlighting transformation plugin
  */
@@ -9,7 +7,6 @@ AJAX.registerOnload('transformations/json.js', function () {
     var $json = $(this);
     var $pre = $json.find('pre');
     /* We only care about visible elements to avoid double processing */
-
     if ($pre.is(':visible')) {
       var $highlight = $('<div class="json-highlight cm-s-default"></div>');
       $json.append($highlight);

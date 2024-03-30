@@ -1,7 +1,4 @@
 <?php
-/**
- * `LIMIT` keyword parser.
- */
 
 declare(strict_types=1);
 
@@ -14,6 +11,8 @@ use PhpMyAdmin\SqlParser\TokensList;
 
 /**
  * `LIMIT` keyword parser.
+ *
+ * @final
  */
 class Limit extends Component
 {
@@ -42,9 +41,9 @@ class Limit extends Component
     }
 
     /**
-     * @param Parser     $parser  the parser that serves as context
-     * @param TokensList $list    the list of tokens that are being parsed
-     * @param array      $options parameters for parsing
+     * @param Parser               $parser  the parser that serves as context
+     * @param TokensList           $list    the list of tokens that are being parsed
+     * @param array<string, mixed> $options parameters for parsing
      *
      * @return Limit
      */
@@ -57,8 +56,6 @@ class Limit extends Component
         for (; $list->idx < $list->count; ++$list->idx) {
             /**
              * Token parsed at this moment.
-             *
-             * @var Token
              */
             $token = $list->tokens[$list->idx];
 
@@ -105,10 +102,7 @@ class Limit extends Component
         }
 
         if ($offset) {
-            $parser->error(
-                'An offset was expected.',
-                $list->tokens[$list->idx - 1]
-            );
+            $parser->error('An offset was expected.', $list->tokens[$list->idx - 1]);
         }
 
         --$list->idx;
@@ -117,8 +111,8 @@ class Limit extends Component
     }
 
     /**
-     * @param Limit $component the component to be built
-     * @param array $options   parameters for building
+     * @param Limit                $component the component to be built
+     * @param array<string, mixed> $options   parameters for building
      *
      * @return string
      */

@@ -1,7 +1,4 @@
 <?php
-/**
- * Routine utilities.
- */
 
 declare(strict_types=1);
 
@@ -12,6 +9,7 @@ use PhpMyAdmin\SqlParser\Components\ParameterDefinition;
 use PhpMyAdmin\SqlParser\Lexer;
 use PhpMyAdmin\SqlParser\Parser;
 use PhpMyAdmin\SqlParser\Statements\CreateStatement;
+
 use function implode;
 use function is_string;
 
@@ -25,7 +23,7 @@ class Routine
      *
      * @param string $param parameter's definition
      *
-     * @return array
+     * @return string[]
      */
     public static function getReturnType($param)
     {
@@ -63,7 +61,7 @@ class Routine
      *
      * @param string $param parameter's definition
      *
-     * @return array
+     * @return string[]
      */
     public static function getParameter($param)
     {
@@ -103,7 +101,7 @@ class Routine
      *
      * @param CreateStatement $statement the statement to be processed
      *
-     * @return array
+     * @return array<string, int|array<int, mixed[]|string|null>>
      */
     public static function getParameters($statement)
     {

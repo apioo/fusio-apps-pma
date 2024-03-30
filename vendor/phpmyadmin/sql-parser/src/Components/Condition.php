@@ -1,7 +1,4 @@
 <?php
-/**
- * `WHERE` keyword parser.
- */
 
 declare(strict_types=1);
 
@@ -11,6 +8,7 @@ use PhpMyAdmin\SqlParser\Component;
 use PhpMyAdmin\SqlParser\Parser;
 use PhpMyAdmin\SqlParser\Token;
 use PhpMyAdmin\SqlParser\TokensList;
+
 use function implode;
 use function in_array;
 use function is_array;
@@ -18,13 +16,15 @@ use function trim;
 
 /**
  * `WHERE` keyword parser.
+ *
+ * @final
  */
 class Condition extends Component
 {
     /**
      * Logical operators that can be used to delimit expressions.
      *
-     * @var array
+     * @var string[]
      */
     public static $DELIMITERS = [
         '&&',
@@ -37,7 +37,7 @@ class Condition extends Component
     /**
      * List of allowed reserved keywords in conditions.
      *
-     * @var array
+     * @var array<string, int>
      */
     public static $ALLOWED_KEYWORDS = [
         'ALL' => 1,
@@ -57,13 +57,14 @@ class Condition extends Component
         'OR' => 1,
         'REGEXP' => 1,
         'RLIKE' => 1,
+        'SOUNDS' => 1,
         'XOR' => 1,
     ];
 
     /**
      * Identifiers recognized.
      *
-     * @var array
+     * @var array<int, mixed>
      */
     public $identifiers = [];
 
@@ -90,9 +91,9 @@ class Condition extends Component
     }
 
     /**
-     * @param Parser     $parser  the parser that serves as context
-     * @param TokensList $list    the list of tokens that are being parsed
-     * @param array      $options parameters for parsing
+     * @param Parser               $parser  the parser that serves as context
+     * @param TokensList           $list    the list of tokens that are being parsed
+     * @param array<string, mixed> $options parameters for parsing
      *
      * @return Condition[]
      */
@@ -123,8 +124,6 @@ class Condition extends Component
         for (; $list->idx < $list->count; ++$list->idx) {
             /**
              * Token parsed at this moment.
-             *
-             * @var Token
              */
             $token = $list->tokens[$list->idx];
 
@@ -168,7 +167,8 @@ class Condition extends Component
                 }
             }
 
-            if (($token->type === Token::TYPE_KEYWORD)
+            if (
+                ($token->type === Token::TYPE_KEYWORD)
                 && ($token->flags & Token::FLAG_KEYWORD_RESERVED)
                 && ! ($token->flags & Token::FLAG_KEYWORD_FUNCTION)
             ) {
@@ -194,16 +194,21 @@ class Condition extends Component
             }
 
             $expr->expr .= $token->token;
-            if (($token->type === Token::TYPE_NONE)
-                || (($token->type === Token::TYPE_KEYWORD)
-                && (! ($token->flags & Token::FLAG_KEYWORD_RESERVED)))
-                || ($token->type === Token::TYPE_STRING)
-                || ($token->type === Token::TYPE_SYMBOL)
+            if (
+                ($token->type !== Token::TYPE_NONE)
+                && (($token->type !== Token::TYPE_KEYWORD)
+                || ($token->flags & Token::FLAG_KEYWORD_RESERVED))
+                && ($token->type !== Token::TYPE_STRING)
+                && ($token->type !== Token::TYPE_SYMBOL)
             ) {
-                if (! in_array($token->value, $expr->identifiers)) {
-                    $expr->identifiers[] = $token->value;
-                }
+                continue;
             }
+
+            if (in_array($token->value, $expr->identifiers)) {
+                continue;
+            }
+
+            $expr->identifiers[] = $token->value;
         }
 
         // Last iteration was not processed.
@@ -218,8 +223,8 @@ class Condition extends Component
     }
 
     /**
-     * @param Condition[] $component the component to be built
-     * @param array       $options   parameters for building
+     * @param Condition[]          $component the component to be built
+     * @param array<string, mixed> $options   parameters for building
      *
      * @return string
      */

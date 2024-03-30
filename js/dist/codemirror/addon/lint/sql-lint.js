@@ -1,15 +1,11 @@
-"use strict";
-
 CodeMirror.sqlLint = function (text, updateLinting, options, cm) {
   // Skipping check if text box is empty.
   if (text.trim() === '') {
     updateLinting(cm, []);
     return;
   }
-
   function handleResponse(response) {
     var found = [];
-
     for (var idx in response) {
       found.push({
         // eslint-disable-next-line new-cap
@@ -20,10 +16,8 @@ CodeMirror.sqlLint = function (text, updateLinting, options, cm) {
         severity: response[idx].severity
       });
     }
-
     updateLinting(cm, found);
   }
-
   $.ajax({
     method: 'POST',
     url: 'index.php?route=/lint',

@@ -1,7 +1,4 @@
 <?php
-/**
- * `CALL` statement.
- */
 
 declare(strict_types=1);
 
@@ -9,6 +6,7 @@ namespace PhpMyAdmin\SqlParser\Statements;
 
 use PhpMyAdmin\SqlParser\Components\FunctionCall;
 use PhpMyAdmin\SqlParser\Statement;
+
 use function implode;
 
 /**
@@ -25,7 +23,7 @@ class CallStatement extends Statement
     /**
      * The name of the function and its parameters.
      *
-     * @var FunctionCall
+     * @var FunctionCall|null
      */
     public $call;
 

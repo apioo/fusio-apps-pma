@@ -11,6 +11,8 @@ A validating SQL lexer and parser with a focus on MySQL dialect.
 [![Translation status](https://hosted.weblate.org/widgets/phpmyadmin/-/svg-badge.svg)](https://hosted.weblate.org/engage/phpmyadmin/?utm_source=widget)
 [![Packagist](https://img.shields.io/packagist/dt/phpmyadmin/sql-parser.svg)](https://packagist.org/packages/phpmyadmin/sql-parser)
 [![Open Source Helpers](https://www.codetriage.com/phpmyadmin/sql-parser/badges/users.svg)](https://www.codetriage.com/phpmyadmin/sql-parser)
+[![Type coverage](https://shepherd.dev/github/phpmyadmin/sql-parser/coverage.svg)](https://shepherd.dev/github/phpmyadmin/sql-parser)
+[![Infection MSI](https://badge.stryker-mutator.io/github.com/phpmyadmin/sql-parser/master)](https://infection.github.io)
 
 ## Installation
 
@@ -22,7 +24,7 @@ composer require phpmyadmin/sql-parser
 
 ## Documentation
 
-The API documentation is available at 
+The API documentation is available at
 <https://develdocs.phpmyadmin.net/sql-parser/>.
 
 ## Usage
@@ -94,7 +96,7 @@ $query2 = $statement->build();
 var_dump($query2); // outputs string(19) 'SELECT  * FROM `b` '
 
 // Change SQL mode
-PhpMyAdmin\SqlParser\Context::setMode('ANSI_QUOTES');
+PhpMyAdmin\SqlParser\Context::setMode(PhpMyAdmin\SqlParser\Context::SQL_MODE_ANSI_QUOTES);
 
 // build the query again using different quotes
 $query2 = $statement->build();

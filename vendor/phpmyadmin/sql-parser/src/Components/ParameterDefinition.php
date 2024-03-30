@@ -1,7 +1,4 @@
 <?php
-/**
- * The definition of a parameter of a function or procedure.
- */
 
 declare(strict_types=1);
 
@@ -12,12 +9,15 @@ use PhpMyAdmin\SqlParser\Context;
 use PhpMyAdmin\SqlParser\Parser;
 use PhpMyAdmin\SqlParser\Token;
 use PhpMyAdmin\SqlParser\TokensList;
+
 use function implode;
 use function is_array;
 use function trim;
 
 /**
  * The definition of a parameter of a function or procedure.
+ *
+ * @final
  */
 class ParameterDefinition extends Component
 {
@@ -55,9 +55,9 @@ class ParameterDefinition extends Component
     }
 
     /**
-     * @param Parser     $parser  the parser that serves as context
-     * @param TokensList $list    the list of tokens that are being parsed
-     * @param array      $options parameters for parsing
+     * @param Parser               $parser  the parser that serves as context
+     * @param TokensList           $list    the list of tokens that are being parsed
+     * @param array<string, mixed> $options parameters for parsing
      *
      * @return ParameterDefinition[]
      */
@@ -89,8 +89,6 @@ class ParameterDefinition extends Component
         for (; $list->idx < $list->count; ++$list->idx) {
             /**
              * Token parsed at this moment.
-             *
-             * @var Token
              */
             $token = $list->tokens[$list->idx];
 
@@ -148,7 +146,7 @@ class ParameterDefinition extends Component
 
     /**
      * @param ParameterDefinition[] $component the component to be built
-     * @param array                 $options   parameters for building
+     * @param array<string, mixed>  $options   parameters for building
      *
      * @return string
      */

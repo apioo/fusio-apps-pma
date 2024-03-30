@@ -1,7 +1,4 @@
 <?php
-/**
- * Token utilities.
- */
 
 declare(strict_types=1);
 
@@ -10,6 +7,8 @@ namespace PhpMyAdmin\SqlParser\Utils;
 use PhpMyAdmin\SqlParser\Lexer;
 use PhpMyAdmin\SqlParser\Token;
 use PhpMyAdmin\SqlParser\TokensList;
+use PhpMyAdmin\SqlParser\UtfString;
+
 use function count;
 use function strcasecmp;
 
@@ -21,37 +20,29 @@ class Tokens
     /**
      * Checks if a pattern is a match for the specified token.
      *
-     * @param Token $token   the token to be matched
-     * @param array $pattern the pattern to be matches
+     * @param Token                          $token   the token to be matched
+     * @param array<string, int|string|null> $pattern the pattern to be matches
      *
      * @return bool
      */
     public static function match(Token $token, array $pattern)
     {
         // Token.
-        if (isset($pattern['token'])
-            && ($pattern['token'] !== $token->token)
-        ) {
+        if (isset($pattern['token']) && ($pattern['token'] !== $token->token)) {
             return false;
         }
 
         // Value.
-        if (isset($pattern['value'])
-            && ($pattern['value'] !== $token->value)
-        ) {
+        if (isset($pattern['value']) && ($pattern['value'] !== $token->value)) {
             return false;
         }
 
-        if (isset($pattern['value_str'])
-            && strcasecmp($pattern['value_str'], (string) $token->value)
-        ) {
+        if (isset($pattern['value_str']) && strcasecmp($pattern['value_str'], (string) $token->value)) {
             return false;
         }
 
         // Type.
-        if (isset($pattern['type'])
-            && ($pattern['type'] !== $token->type)
-        ) {
+        if (isset($pattern['type']) && ($pattern['type'] !== $token->type)) {
             return false;
         }
 
@@ -62,8 +53,8 @@ class Tokens
 
     /**
      * @param TokensList|string|UtfString $list
-     * @param array                       $find
-     * @param array                       $replace
+     * @param Token[]                     $find
+     * @param Token[]                     $replace
      *
      * @return TokensList
      */
@@ -71,8 +62,6 @@ class Tokens
     {
         /**
          * Whether the first parameter is a list.
-         *
-         * @var bool
          */
         $isList = $list instanceof TokensList;
 
@@ -84,7 +73,7 @@ class Tokens
         /**
          * The list to be returned.
          *
-         * @var array
+         * @var Token[]
          */
         $newList = [];
 
@@ -115,8 +104,6 @@ class Tokens
              *
              * This index might be running faster than `$k` because some tokens
              * are skipped.
-             *
-             * @var int
              */
             $j = $i;
 
@@ -163,7 +150,6 @@ class Tokens
             }
         }
 
-        return $isList ?
-            new TokensList($newList) : TokensList::build($newList);
+        return $isList ? new TokensList($newList) : TokensList::build($newList);
     }
 }

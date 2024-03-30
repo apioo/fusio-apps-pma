@@ -4,27 +4,31 @@ declare(strict_types=1);
 
 namespace PhpMyAdmin;
 
-use FastRoute\Dispatcher;
-use Psr\Container\ContainerInterface;
-use FastRoute\RouteParser\Std as RouteParserStd;
 use FastRoute\DataGenerator\GroupCountBased as DataGeneratorGroupCountBased;
+use FastRoute\Dispatcher;
 use FastRoute\Dispatcher\GroupCountBased as DispatcherGroupCountBased;
 use FastRoute\RouteCollector;
+use FastRoute\RouteParser\Std as RouteParserStd;
+use PhpMyAdmin\Controllers\HomeController;
+use PhpMyAdmin\Http\ServerRequest;
+use Psr\Container\ContainerInterface;
+
+use function __;
+use function file_exists;
+use function file_put_contents;
 use function htmlspecialchars;
-use function mb_strlen;
+use function is_array;
+use function is_readable;
+use function is_string;
+use function is_writable;
 use function rawurldecode;
 use function sprintf;
-use function is_writable;
-use function file_exists;
-use function is_array;
-use RuntimeException;
-use function var_export;
-use function is_readable;
 use function trigger_error;
+use function var_export;
+
+use const CACHE_DIR;
 use const E_USER_WARNING;
-use function fopen;
-use function fwrite;
-use function fclose;
+use const ROOT_PATH;
 
 /**
  * Class used to warm up the routing cache and manage routing.
@@ -70,13 +74,11 @@ class Routing
         // If skip cache is enabled, do not try to read the file
         // If no cache skipping then read it and use it
         if (! $skipCache && file_exists(self::ROUTES_CACHE_FILE)) {
-            /** @psalm-suppress MissingFile */
+            /** @psalm-suppress MissingFile, UnresolvableInclude, MixedAssignment */
             $dispatchData = require self::ROUTES_CACHE_FILE;
-            if (! is_array($dispatchData)) {
-                throw new RuntimeException('Invalid cache file "' . self::ROUTES_CACHE_FILE . '"');
+            if (self::isRoutesCacheFileValid($dispatchData)) {
+                return new DispatcherGroupCountBased($dispatchData);
             }
-
-            return new DispatcherGroupCountBased($dispatchData);
         }
 
         $routeCollector = new RouteCollector(
@@ -85,7 +87,6 @@ class Routing
         );
         $routeDefinitionCallback($routeCollector);
 
-        /** @var RouteCollector $routeCollector */
         $dispatchData = $routeCollector->getData();
         $canWriteCache = self::canWriteCache();
 
@@ -114,31 +115,29 @@ class Routing
 
     public static function writeCache(string $cacheContents): bool
     {
-        $handle = @fopen(self::ROUTES_CACHE_FILE, 'w');
-        if ($handle === false) {
-            return false;
-        }
-        $couldWrite = fwrite($handle, $cacheContents);
-        fclose($handle);
-
-        return $couldWrite !== false;
+        return @file_put_contents(self::ROUTES_CACHE_FILE, $cacheContents) !== false;
     }
 
+    /**
+     * @psalm-return non-empty-string
+     */
     public static function getCurrentRoute(): string
     {
-        /** @var string $route */
+        /** @var mixed $route */
         $route = $_GET['route'] ?? $_POST['route'] ?? '/';
+        if (! is_string($route) || $route === '') {
+            $route = '/';
+        }
 
         /**
          * See FAQ 1.34.
          *
          * @see https://docs.phpmyadmin.net/en/latest/faq.html#faq1-34
          */
-        if (($route === '/' || $route === '') && isset($_GET['db']) && mb_strlen($_GET['db']) !== 0) {
-            $route = '/database/structure';
-            if (isset($_GET['table']) && mb_strlen($_GET['table']) !== 0) {
-                $route = '/sql';
-            }
+        $db = isset($_GET['db']) && is_string($_GET['db']) ? $_GET['db'] : '';
+        if ($route === '/' && $db !== '') {
+            $table = isset($_GET['table']) && is_string($_GET['table']) ? $_GET['table'] : '';
+            $route = $table === '' ? '/database/structure' : '/sql';
         }
 
         return $route;
@@ -148,18 +147,16 @@ class Routing
      * Call associated controller for a route using the dispatcher
      */
     public static function callControllerForRoute(
+        ServerRequest $request,
         string $route,
         Dispatcher $dispatcher,
         ContainerInterface $container
     ): void {
-        $routeInfo = $dispatcher->dispatch(
-            $_SERVER['REQUEST_METHOD'],
-            rawurldecode($route)
-        );
+        $routeInfo = $dispatcher->dispatch($request->getMethod(), rawurldecode($route));
 
         if ($routeInfo[0] === Dispatcher::NOT_FOUND) {
-            /** @var Response $response */
-            $response = $container->get(Response::class);
+            /** @var ResponseRenderer $response */
+            $response = $container->get(ResponseRenderer::class);
             $response->setHttpResponseCode(404);
             echo Message::error(sprintf(
                 __('Error 404! The page %s was not found.'),
@@ -170,8 +167,8 @@ class Routing
         }
 
         if ($routeInfo[0] === Dispatcher::METHOD_NOT_ALLOWED) {
-            /** @var Response $response */
-            $response = $container->get(Response::class);
+            /** @var ResponseRenderer $response */
+            $response = $container->get(ResponseRenderer::class);
             $response->setHttpResponseCode(405);
             echo Message::error(__('Error 405! Request method not allowed.'))->getDisplay();
 
@@ -182,8 +179,30 @@ class Routing
             return;
         }
 
-        [$controllerName, $action] = $routeInfo[1];
+        /** @psalm-var class-string $controllerName */
+        $controllerName = $routeInfo[1];
+        /** @var array<string, string> $vars */
+        $vars = $routeInfo[2];
+
+        /**
+         * @psalm-var callable(ServerRequest=, array<string, string>=):void $controller
+         */
         $controller = $container->get($controllerName);
-        $controller->$action($routeInfo[2]);
+        $controller($request, $vars);
+    }
+
+    /**
+     * @param mixed $dispatchData
+     *
+     * @psalm-assert-if-true array[] $dispatchData
+     */
+    private static function isRoutesCacheFileValid($dispatchData): bool
+    {
+        return is_array($dispatchData)
+            && isset($dispatchData[0], $dispatchData[1])
+            && is_array($dispatchData[0]) && is_array($dispatchData[1])
+            && isset($dispatchData[0]['GET']) && is_array($dispatchData[0]['GET'])
+            && isset($dispatchData[0]['GET']['/']) && is_string($dispatchData[0]['GET']['/'])
+            && $dispatchData[0]['GET']['/'] === HomeController::class;
     }
 }

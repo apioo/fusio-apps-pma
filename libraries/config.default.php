@@ -34,6 +34,7 @@ declare(strict_types=1);
  * an error message if phpMyAdmin cannot auto-detect the correct value.
  *
  * @global string $cfg['PmaAbsoluteUri']
+ * @psalm-suppress PossiblyUndefinedGlobalVariable
  */
 $cfg['PmaAbsoluteUri'] = '';
 
@@ -99,10 +100,9 @@ $cfg['TranslationWarningThreshold'] = 80;
 $cfg['AllowThirdPartyFraming'] = false;
 
 /**
- * The 'cookie' auth_type uses AES algorithm to encrypt the password. If
- * at least one server configuration uses 'cookie' auth_type, enter here a
- * pass phrase that will be used by AES. The maximum length seems to be 46
- * characters.
+ * The 'cookie' auth_type uses the Sodium extension to encrypt the cookies. If at least one server configuration
+ * uses 'cookie' auth_type, enter here a generated string of random bytes to be used as an encryption key. The
+ * encryption key must be 32 bytes long.
  *
  * @global string $cfg['blowfish_secret']
  */
@@ -189,7 +189,7 @@ $cfg['Servers'][$i]['ssl_ciphers'] = null;
 
 /**
  * MySQL 5.6 or later triggers the mysqlnd driver in PHP to validate the
- * peer_name of the SSL certifcate
+ * peer_name of the SSL certificate
  * For most self-signed certificates this is a problem. Setting this to false
  * will disable the check and allow the connection (PHP 5.6.16 or later)
  *
@@ -577,8 +577,7 @@ $cfg['Servers'][$i]['tracking_version_auto_create'] = false;
  *
  * @global string $cfg['Servers'][$i]['tracking_default_statements']
  */
-$cfg['Servers'][$i]['tracking_default_statements']
-    = 'CREATE TABLE,ALTER TABLE,DROP TABLE,RENAME TABLE,CREATE INDEX,' .
+$cfg['Servers'][$i]['tracking_default_statements'] = 'CREATE TABLE,ALTER TABLE,DROP TABLE,RENAME TABLE,CREATE INDEX,' .
       'DROP INDEX,INSERT,UPDATE,DELETE,TRUNCATE,REPLACE,CREATE VIEW,' .
       'ALTER VIEW,DROP VIEW,CREATE DATABASE,ALTER DATABASE,DROP DATABASE';
 
@@ -607,6 +606,13 @@ $cfg['Servers'][$i]['tracking_add_drop_table'] = true;
 $cfg['Servers'][$i]['tracking_add_drop_database'] = true;
 
 /**
+ * Whether to show or hide detailed MySQL/MariaDB connection errors on the login page.
+ *
+ * @global bool $cfg['Servers'][$i]['hide_connection_errors']
+ */
+$cfg['Servers'][$i]['hide_connection_errors'] = false;
+
+/**
  * Default server (0 = no default server)
  *
  * If you have more than one server configured, you can set $cfg['ServerDefault']
@@ -619,7 +625,7 @@ $cfg['Servers'][$i]['tracking_add_drop_database'] = true;
  */
 $cfg['ServerDefault'] = 1;
 
-/*
+/**
  * Other core phpMyAdmin settings
  */
 
@@ -786,9 +792,14 @@ $cfg['Confirm'] = true;
 /**
  * sets SameSite attribute of the Set-Cookie HTTP response header
  *
- * @global boolean $cfg['CookieSameSite']
+ * Valid values are:
+ *    - Lax
+ *    - Strict
+ *    - None
+ *
+ * @global string $cfg['CookieSameSite']
  */
- $cfg['CookieSameSite'] = 'Strict';
+$cfg['CookieSameSite'] = 'Strict';
 
 /**
  * recall previous login in cookie authentication mode or not
@@ -833,6 +844,20 @@ $cfg['UseDbSearch'] = true;
  * @global boolean $cfg['IgnoreMultiSubmitErrors']
  */
 $cfg['IgnoreMultiSubmitErrors'] = false;
+
+/**
+ * Define whether phpMyAdmin will encrypt sensitive data from the URL query string.
+ *
+ * @global bool $cfg['URLQueryEncryption']
+ */
+$cfg['URLQueryEncryption'] = false;
+
+/**
+ * A secret key used to encrypt/decrypt the URL query string. Should be 32 bytes long.
+ *
+ * @global string $cfg['URLQueryEncryptionSecretKey']
+ */
+$cfg['URLQueryEncryptionSecretKey'] = '';
 
 /**
  * allow login to any user entered server in cookie based authentication
@@ -1173,7 +1198,8 @@ $cfg['ShowCreateDb'] = true;
  * Database structure
  */
 
-/** show charset column in database structure (true|false)?
+/**
+ * show charset column in database structure (true|false)?
  *
  * @global boolean $cfg['ShowDbStructureCharset']
  */
@@ -1651,7 +1677,7 @@ $cfg['Export']['texytext_null'] = 'NULL';
 /**
  * @global boolean $cfg['Export']['csv_columns']
  */
-$cfg['Export']['csv_columns'] = false;
+$cfg['Export']['csv_columns'] = true;
 
 /**
  * @global string $cfg['Export']['csv_structure_or_data']
@@ -1758,8 +1784,7 @@ $cfg['Export']['latex_structure_caption'] = 'strLatexStructure';
 /**
  * @global string $cfg['Export']['latex_structure_continued_caption']
  */
-$cfg['Export']['latex_structure_continued_caption']
-    = 'strLatexStructure strLatexContinued';
+$cfg['Export']['latex_structure_continued_caption'] = 'strLatexStructure strLatexContinued';
 
 /**
  * @global string $cfg['Export']['latex_data_caption']
@@ -1829,6 +1854,11 @@ $cfg['Export']['json_pretty_print'] = false;
  * @global string $cfg['Export']['json_unicode']
  */
 $cfg['Export']['json_unicode'] = true;
+
+/**
+ * @global string $cfg['Export']['remove_definer_from_definitions']
+ */
+$cfg['Export']['remove_definer_from_definitions'] = false;
 
 /**
  * @global string $cfg['Export']['sql_structure_or_data']
@@ -2517,7 +2547,7 @@ $cfg['CharTextareaCols'] = 40;
  *
  * @global integer $cfg['CharTextareaRows']
  */
-$cfg['CharTextareaRows'] = 2;
+$cfg['CharTextareaRows'] = 7;
 
 /**
  * Max field data length in browse mode for all non-numeric fields
@@ -2794,7 +2824,6 @@ if (defined('TEMP_DIR')) {
     $cfg['TempDir'] = ROOT_PATH . 'tmp' . DIRECTORY_SEPARATOR;
 }
 
-
 /**
  * Misc. settings
  */
@@ -2828,7 +2857,7 @@ $cfg['CheckConfigurationPermissions'] = true;
  * is replaced by form with button.
  * This is required as some web servers (IIS) have problems with long URLs.
  * The recommended limit is 2000
- * (see https://www.boutell.com/newfaq/misc/urllength.html) but we put
+ * (see https://stackoverflow.com/a/417184/5155484) but we put
  * 1000 to accommodate Suhosin, see bug #3358750.
  */
 $cfg['LinkLengthLimit'] = 1000;
@@ -2836,7 +2865,7 @@ $cfg['LinkLengthLimit'] = 1000;
 /**
  * Additional string to allow in CSP headers.
  */
- $cfg['CSPAllow'] = '';
+$cfg['CSPAllow'] = '';
 
 /**
  * Disable the table maintenance mass operations, like optimizing or

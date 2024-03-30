@@ -1,5 +1,51 @@
 # Change Log
 
+## [5.7.0] - 2023-01-25
+
+* Performance improvement to use less the `nextToken()` function (#397)
+* Lexer - Solving ambiguity on function keywords (#385)
+* Implement `ALTER EVENT` (#404)
+* Add `ALTER EVENT` keywords (#404)
+* Drop PHP 7.1 support
+* Fix the alter operation table options `RENAME INDEX x TO y` (#405)
+* Fix `CreateStatement` function's options (#406)
+* Fix a PHP notice on Linter using `ANALYZE` (#413)
+
+## [5.6.0] - 2023-01-02
+
+* Add missing return types annotations
+* Improve the WITH statements parser (#363)
+* Add support for passing `Context::SQL_MODE*` constants to `Context::setMode` method
+* Fix additional body tokens issue with `CREATE VIEW` statements (#371)
+* Exclude from composer vendor bundle /tests and /phpunit.xml.dist
+* Support table structure with `COMPRESSED` columns (#351)
+* Add `#[\AllowDynamicProperties]` on `Statement` and `Expression` classes for PHP 8.2 support
+* Support `ALTER` queries of `PARTITIONS` (#329)
+* Fixed differentiating between `ANALYZE` and `EXPLAIN` statements (#386)
+* Added "NOT" to the select options (#374)
+* Implement the `EXPLAIN` Parser (#389)
+* Context: Updated contexts to contain `multipoint` and `multipolygon` data types (#393)
+* Support more keywords on `Expression` component (#399)
+* Fix PHP 8.3 failing tests (#400)
+
+## [5.5.0] - 2021-12-08
+
+* Add WITH support (#165, #331)
+* Fixed BufferedQuery when it has an odd number of backslashes in the end (#340)
+* Fixed the issue that ignored the body tokens when creating views with union (#343)
+* Fixed parser errors on "ALTER TABLE" statements to add columns with SET type (#168)
+* Fixed PHP 8.1 fatal errors on classes that "implements ArrayAccess"
+* Add new contexts for MariaDB 10.4, 10.5, 10.6 (#328)
+* Fixed parser errors for "ALTER USER" with options (#342)
+* Fixed handling of the procedures and functions's options where part of the body (#339)
+* Fix PHP notice "Undefined index: name in src/Components/Key.php#206" for table keys using expressions (#347)
+* Added support for MySQL 8.0 table structure KEY expressions (#347)
+* Added support for KEY order (ASC/DESC) (#296)
+* Added missing KEY options for MySQL and MariaDB (#348)
+* Added support for ENFORCED and NOT ENFORCED on table create queries (#341)
+* Performance improvement to use less the "ord()" function (#352)
+* Added support for OVER() with an alias (AS) (#197)
+
 ## [5.4.2] - 2021-02-05
 
 * Added check for quoted symbol to avoid parser error in case of keyword (#317)
@@ -62,6 +108,21 @@
 * Fix for PHP warnings with an incomplete CASE expression (#241)
 * Fix for error message with multiple CALL statements (#223)
 * Recognize the question mark character as a parameter (#242)
+
+## [4.7.4] - YYYY-MM-DD
+
+## [4.7.3] - 2021-12-08
+
+- Fixed BufferedQuery when it has an odd number of backslashes in the end (#340)
+- Fixed the issue that ignored the body tokens when creating views with union (#343)
+- Fixed parser errors on "ALTER TABLE" statements to add columns with SET type (#168)
+- Fixed parser errors for "ALTER USER" with options (#342)
+- Fixed handling of the procedures and functions's options where part of the body (#339)
+- Fix PHP notice "Undefined index: name in src/Components/Key.php#206" for table keys using functions (#347)
+- Fix MySQL 8.0 table structure KEY expression not recognized (#347)
+- Fix KEY order (ASC/DESC) not part of the KEY definition (#296)
+- Fix missing KEY options for MySQL and MariaDB (#348)
+- Fix validation error when using ENFORCED option (#341)
 
 ## [4.7.2] - 2021-02-05
 

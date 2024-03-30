@@ -1,7 +1,4 @@
 <?php
-/**
- * `ORDER BY` keyword parser.
- */
 
 declare(strict_types=1);
 
@@ -11,11 +8,14 @@ use PhpMyAdmin\SqlParser\Component;
 use PhpMyAdmin\SqlParser\Parser;
 use PhpMyAdmin\SqlParser\Token;
 use PhpMyAdmin\SqlParser\TokensList;
+
 use function implode;
 use function is_array;
 
 /**
  * `ORDER BY` keyword parser.
+ *
+ * @final
  */
 class OrderKeyword extends Component
 {
@@ -44,9 +44,9 @@ class OrderKeyword extends Component
     }
 
     /**
-     * @param Parser     $parser  the parser that serves as context
-     * @param TokensList $list    the list of tokens that are being parsed
-     * @param array      $options parameters for parsing
+     * @param Parser               $parser  the parser that serves as context
+     * @param TokensList           $list    the list of tokens that are being parsed
+     * @param array<string, mixed> $options parameters for parsing
      *
      * @return OrderKeyword[]
      */
@@ -73,8 +73,6 @@ class OrderKeyword extends Component
         for (; $list->idx < $list->count; ++$list->idx) {
             /**
              * Token parsed at this moment.
-             *
-             * @var Token
              */
             $token = $list->tokens[$list->idx];
 
@@ -92,13 +90,12 @@ class OrderKeyword extends Component
                 $expr->expr = Expression::parse($parser, $list);
                 $state = 1;
             } elseif ($state === 1) {
-                if (($token->type === Token::TYPE_KEYWORD)
+                if (
+                    ($token->type === Token::TYPE_KEYWORD)
                     && (($token->keyword === 'ASC') || ($token->keyword === 'DESC'))
                 ) {
                     $expr->type = $token->keyword;
-                } elseif (($token->type === Token::TYPE_OPERATOR)
-                    && ($token->value === ',')
-                ) {
+                } elseif (($token->type === Token::TYPE_OPERATOR) && ($token->value === ',')) {
                     if (! empty($expr->expr)) {
                         $ret[] = $expr;
                     }
@@ -123,7 +120,7 @@ class OrderKeyword extends Component
 
     /**
      * @param OrderKeyword|OrderKeyword[] $component the component to be built
-     * @param array                       $options   parameters for building
+     * @param array<string, mixed>        $options   parameters for building
      *
      * @return string
      */
